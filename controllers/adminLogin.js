@@ -28,8 +28,8 @@ function checkAdminCredentails(uname, pass, cb) {
     if (uname && pass) {
         let bcrypt = require('bcrypt');
         let db = require('../helpers/database')(require('../config.json'));
-        db.query('SELECT * FROM admins WHERE username = ? AND password = ?', [uname, bcrypt.hashSync(pass, 10)], (err, result, fields) => {
-            if (result.length > 0) {
+        db.query('SELECT * FROM admins WHERE username = ?', [uname], (nerr, result, fields) => {
+            if (result.length > 0 && bcrypt.compareSync(pass,result[0].password)) {
                 cb(true, result[0].id);
             } else {
                 cb(false);

@@ -34,8 +34,8 @@ function checkUserCredentails(username, pass, cb) {
     if (username && pass) {
         let bcrypt = require('bcrypt');
         let db = require('../helpers/database')(require('../config.json'));
-        db.query('SELECT * FROM clients WHERE username = ? AND password = ?', [username, bcrypt.hashSync(pass, 10)], (err, result, fields) => {
-            if (result.length > 0) {
+        db.query('SELECT * FROM clients WHERE username = ?', [username], (err, result, fields) => {
+            if (result.length > 0 && bcrypt.compareSync(pass,result[0].password)) {
                 cb(true, result[0].id);
                 updateLastLogin(result[0].id, db);
             } else {
