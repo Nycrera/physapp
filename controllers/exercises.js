@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = function(req, res){
     let db = require('../helpers/database')(require('../config.json'));
     db.query('SELECT * FROM exercises WHERE disabled = FALSE', [], (err, exercises) => {

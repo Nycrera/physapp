@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = [get, post];
 
 function get(req, res, next) {

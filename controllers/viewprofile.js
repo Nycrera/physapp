@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = function(req, res, next){
     if(!req.query.id){
         res.redirect('/admin_dashboard');
