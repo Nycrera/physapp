@@ -119,7 +119,7 @@ physapp.uploadVideo = function(name,file,progressBar,cb){
             if (evt.lengthComputable) {
                 var percentComplete = ((evt.loaded / evt.total) * 100);
                 progressBar.style.width = percentComplete.toString() + '%';
-                progressBar.innerText = percentComplete.toString() + '%';
+                progressBar.innerText = percentComplete.toFixed(2).toString() + '%';
             }
         }, false);
         return xhr;
