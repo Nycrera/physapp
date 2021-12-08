@@ -44,18 +44,11 @@ function queryGenerator(data){
     params = '';
 
     for (var key in data) {
-        // skip loop if the property is from prototype
-        if (!data.hasOwnProperty(key)) continue;
-    
-        var obj = data[key];
-        for (var prop in obj) {
-            // skip loop if the property is from prototype
-            if (!obj.hasOwnProperty(prop)) continue;
             if (prop == 'id') continue;
-            if(obj[prop]) params += mysql.escapeId(prop) + ' = ' + mysql.escape(obj[prop]) + ', ';
+            if(data[key]) params += mysql.escapeId(key) + ' = ' + mysql.escape(data[key]) + ', ';
         }
     }
 
-    params = params.slice(0, -1); //Remove last ","
+    params = params.slice(0, -2); //Remove last ","
     query = 'UPDATE clients SET ' + params + ' WHERE id = ?';
 }
