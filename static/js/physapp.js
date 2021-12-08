@@ -108,7 +108,7 @@ physapp.updateExercise = function (exerciseId, data, cb){
 });
 }
 
-physapp.uploadVideo = function(file,name,progressBar,cb){
+physapp.uploadVideo = function(name,file,progressBar,cb){
   var data = new FormData();
   data.append('file',file);
   data.append('name',name);
