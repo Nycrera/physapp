@@ -7,7 +7,7 @@ module.exports = function(req, res, next){
     }
     let db = require('../helpers/database')(require('../config.json'));
     db.query('SELECT * FROM clients WHERE id = ?',[req.query.id], (err,clients)=>{
-        db.query('SELECT * FROM exercises WHERE disabled = FALSE',[], (err2,exercises)=>{
+        db.query('SELECT * FROM exercises',[], (err2,exercises)=>{
             db.query('SELECT * FROM user_exercises WHERE  client = ? AND expiration_time >= NOW() AND disabled = FALSE',[req.query.id], (err3,user_exercises)=>{
             if(err || err2 || err3){
                 console.log(err);
