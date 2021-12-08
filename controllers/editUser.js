@@ -26,7 +26,7 @@ function post(req, res, next){
         let queryString = queryGenerator(req.body);
         let db = require('../helpers/database')(require('../config.json'));
         db.query(queryString, [req.body.id], (err) => {
-            db.query('SELECT * FROM clients WHERE id = ?', [req.body.id], (err2, result2) => {
+            db.query('SELECT * FROM clients WHERE id = ?', [req.body.id], (err, result) => {
             let user = result[0];
             if(err){
                 console.log(err);
