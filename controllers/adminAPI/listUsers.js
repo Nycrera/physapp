@@ -9,6 +9,7 @@ module.exports = function (req, res, next) {
             return;
         }
         result.forEach((user,index) => {
+            var moment = require('moment');
             result[index].register_date = moment(result[index].register_date).format("DD-MM-YYYY hh:mm:ss");
             result[index].lastlogin = moment(result[index].lastlogin).format("DD-MM-YYYY hh:mm:ss");
             getProgress(db, user.id, (percentage) => {
