@@ -1,5 +1,5 @@
 const path = require('path');
-
+const fs = require('fs');
 module.exports = function (req, res, next) {
 
   let db = require('../../helpers/database')(require('../../config.json'));

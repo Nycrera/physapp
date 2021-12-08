@@ -243,10 +243,10 @@
       });
     });
 
-    $('button3').on('click',function(){
+    $('button3').on('click',function (){
       // Upload video file with name
       var name = document.getElementById('videoName').value;
-      physapp.uploadVideo(name, document.getElementById('formFile').files[0], document.getElementById('vid-progress-bar'), function(err,id){
+      physapp.uploadVideo(name, document.getElementById('formFile').files[0], document.getElementById('vid-progress-bar'), (err,id) => {
         if(err){
           physapp.createClosableAlert("danger","Video yüklenirken sunucu hatası ile karşılaşıldı.","alertBox3");
         }else{
