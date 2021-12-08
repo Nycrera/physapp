@@ -44,7 +44,7 @@ function queryGenerator(data) {
     params = '';
 
     for (var key in data) {
-        if (prop == 'id') continue;
+        if (key == 'id') continue;
         if (data[key]) params += mysql.escapeId(key) + ' = ' + mysql.escape(data[key]) + ', ';
     }
 
