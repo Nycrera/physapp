@@ -43,10 +43,12 @@
     <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
     <script src="vendors/simplebar/js/simplebar.min.js"></script>
     <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/jquery.preloader.min.js"></script>
     <script src="js/physapp.js"></script>
 
     <script>    
-      document.getElementById("confirmBtn").onclick(()=>{
+      $('#confirmBtn').on('click',()=>{
+        $('body').preloader();
         physapp.disableUser(<%- id %>);
       });
     </script>

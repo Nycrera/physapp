@@ -1,7 +1,7 @@
 var physapp = {};
 
 physapp.fetchUserList = function () { // Call as soon as possible, or after load idk
-  var jqxhr = $.get("adminAPI/listUsers", function (data) {
+  $.get("adminAPI/listUsers", function (data) {
     if(typeof(data) == 'string') data = JSON.parse(data);
     data.users.forEach((user, index) => {
       if(index < (data.users.length-2)){
@@ -63,6 +63,7 @@ physapp.disableUser = function(id) {
     url: 'adminAPI/updateUser',
     data: JSON.stringify({id:id,update:{'disabled':true}}),
     success: function() { 
+      $('body').preloader('remove');
       alert('Kullanıcı hesabı kapatıldı.');
       history.back();
      },
