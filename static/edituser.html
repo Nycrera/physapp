@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="author" content="Alperen Yurdakul">
+  <title>Admin Paneli</title>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Vendors styles-->
+  <link rel="stylesheet" href="vendors/simplebar/css/simplebar.css">
+  <link rel="stylesheet" href="css/vendors/simplebar.css">
+  <!-- Main styles for this application-->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+    <header class="header header-sticky mb-4">
+      <div class="container-fluid">
+        <ul class="header-nav d-none d-md-flex">
+          <li class="nav-item"><a class="nav-link" href="admin_dashboard">Genel Görüş</a></li>
+          <li class="nav-item"><a class="nav-link" href="registerUser">Yeni Kullanıcı Kaydı</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Site Ayarları</a></li>
+        </ul>
+        <ul class="header-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#">
+              <svg class="icon icon-lg">
+                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+              </svg></a></li>
+        </ul>
+        <ul class="header-nav ms-3">
+          <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button"
+              aria-haspopup="true" aria-expanded="false">
+              <div class="avatar avatar-md"><img class="avatar-img" src="assets/img/avatars/default.jpg">
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end pt-0">
+              <div class="dropdown-header bg-light py-2">
+                <div class="fw-semibold">Admin Hesabı</div>
+              </div><a class="dropdown-item" href="#">
+                <svg class="icon me-2">
+                  <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+                </svg> Profil</a><a class="dropdown-item" href="#">
+                <svg class="icon me-2">
+                  <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-settings"></use>
+                </svg> Ayarlar</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="logout">
+                <svg class="icon me-2">
+                  <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
+                </svg> Çıkış</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="header-divider"></div>
+      <div class="container-fluid">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb my-0 ms-2">
+            <li class="breadcrumb-item">
+              <!-- if breadcrumb is single--><span>Ana Sayfa</span>
+            </li>
+            <li class="breadcrumb-item active"><span>Kullanıcı Bilgisi Düzenleme</span></li>
+          </ol>
+        </nav>
+      </div>
+    </header>
+    <div class="body flex-grow-1 px-3">
+      <div class="container-lg">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <div class="card-header">Kullanıcı Düzenle: <%= user.name %> <%= user.surname %></div>
+              <div class="card-body">
+                <form method="POST">
+                  <% if(success){ %> <div class="alert alert-success" role="alert"><%= success%></div> <% } %>
+                  <% if(danger){ %> <div class="alert alert-danger" role="alert"><%= danger%></div> <% } %>
+                  
+                  <div style="display: block;margin-left: auto; margin-right: auto;" class="avatar avatar-lg mb-3">
+                    <img class="avatar-img" src="assets/img/avatars/default.jpg">
+                  </div>
+
+                  <div class="input-group mb-3"><span class="input-group-text">
+                      <svg class="icon">
+                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+                      </svg></span>
+                    <input class="form-control" name="username" type="text" placeholder="<%= user.username%>">
+                  </div>
+                  <div class="input-group mb-3"><span class="input-group-text">
+                      <svg class="icon">
+                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                      </svg></span>
+                    <input class="form-control" name="password" type="password" placeholder="Yeni Şifre">
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"><svg class="icon">
+                      <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+                    </svg></span>
+                    <input class="form-control" name="name" type="text" placeholder="<%= user.surname %>">
+                    <input class="form-control" name="surname" type="text" placeholder="<%= user.name %>">
+                    <input type="hidden" name="id" value="<%= user.id %>">
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <button type="submit" class="btn btn-primary px-4" type="button">Kaydet</button>
+                      <button onclick="location.href = 'admin_dashboard.html'" class="btn btn-secondary px-4" type="button">Geri Dön</button>
+                    </div>
+                  </div>
+                </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.col-->
+        </div>
+        <!-- /.row-->
+
+
+      </div>
+    </div>
+  </div>
+  <!-- CoreUI and necessary plugins-->
+  <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
+  <script src="vendors/simplebar/js/simplebar.min.js"></script>
+  <!-- Plugins and scripts required by this view-->
+  <script src="vendors/@coreui/utils/js/coreui-utils.js"></script>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/physapp.js"></script>
+  <script>
+  </script>
+
+</body>
+
+</html>

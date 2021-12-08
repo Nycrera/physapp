@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="author" content="Alperen Yurdakul">
+  <title>Admin Paneli</title>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Vendors styles-->
+  <link rel="stylesheet" href="vendors/simplebar/css/simplebar.css">
+  <link rel="stylesheet" href="css/vendors/simplebar.css">
+  <!-- Main styles for this application-->
+  <link href="css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/preloader.css">
+</head>
+
+<body>
+  <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+    <header class="header header-sticky mb-4">
+      <div class="container-fluid">
+        <ul class="header-nav d-none d-md-flex">
+          <li class="nav-item"><a class="nav-link" href="admin_dashboard">Genel Görüş</a></li>
+          <li class="nav-item"><a class="nav-link" href="registerUser">Yeni Kullanıcı Kaydı</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Site Ayarları</a></li>
+        </ul>
+        <ul class="header-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#">
+              <svg class="icon icon-lg">
+                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+              </svg></a></li>
+        </ul>
+        <ul class="header-nav ms-3">
+          <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button"
+              aria-haspopup="true" aria-expanded="false">
+              <div class="avatar avatar-md"><img class="avatar-img" src="assets/img/avatars/default.jpg">
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end pt-0">
+              <div class="dropdown-header bg-light py-2">
+                <div class="fw-semibold">Admin Hesabı</div>
+              </div><a class="dropdown-item" href="#">
+                <svg class="icon me-2">
+                  <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+                </svg> Profil</a><a class="dropdown-item" href="#">
+                <svg class="icon me-2">
+                  <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-settings"></use>
+                </svg> Ayarlar</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="logout">
+                <svg class="icon me-2">
+                  <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
+                </svg> Çıkış</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="header-divider"></div>
+      <div class="container-fluid">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb my-0 ms-2">
+            <li class="breadcrumb-item">
+              <!-- if breadcrumb is single--><span>Ana Sayfa</span>
+            </li>
+            <li class="breadcrumb-item active"><span>Genel Görüş</span></li>
+          </ol>
+        </nav>
+      </div>
+    </header>
+    <div class="body flex-grow-1 px-3">
+      <div class="container-lg">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <div class="card-header">Kullanıcı Listesi</div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table border mb-0">
+                    <thead class="table-light fw-semibold">
+                      <tr class="align-middle">
+                        <th class="text-center">
+                          <svg class="icon">
+                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-people"></use>
+                          </svg>
+                        </th>
+                        <th>Kullanıcı</th>
+                        <th class="text-center">Rahatsızlık</th>
+                        <th>Günlük Performans</th>
+                        <th>Aktivite</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody id="renderUsers">
+                      <tr class="align-middle">
+                        <td class="text-center">
+                          <div class="avatar avatar-md"><img class="avatar-img" src="assets/img/avatars/default.jpg"
+                             ><span class="avatar-status bg-success"></span></div>
+                        </td>
+                        <td>
+                          <div>Sevgi Nişancı</div>
+                          <div class="small text-medium-emphasis">Kayıt Tarihi: Aralık 1, 2020</div>
+                        </td>
+                        <td class="text-center">
+                          Diz İncinmesi
+                        </td>
+                        <td>
+                          <div class="clearfix">
+                            <div class="float-start">
+                              <div class="fw-semibold">50%</div>
+                            </div>
+                          </div>
+                          <div class="progress progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
+                              aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="small text-medium-emphasis">Giriş</div>
+                          <div class="fw-semibold">10 saniye önce</div>
+                        </td>
+                        <td>
+                          <div class="dropdown">
+                            <button class="btn btn-transparent p-0" type="button" data-coreui-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="false">
+                              <svg class="icon">
+                                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-options"></use>
+                              </svg>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Profil</a><a
+                                class="dropdown-item" href="#">Düzenle</a><a class="dropdown-item" href="#">Egzersizler</a><a class="dropdown-item text-danger"
+                                href="#">Hesabı Kapat</a></div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr class="align-middle">
+                        <td class="text-center">
+                          <div class="avatar avatar-md"><img class="avatar-img" src="assets/img/avatars/default.jpg"
+                             ><span class="avatar-status bg-success"></span></div>
+                        </td>
+                        <td>
+                          <div>Sevgi Nişancı</div>
+                          <div class="small text-medium-emphasis">Kayıt Tarihi: Aralık 1, 2020</div>
+                        </td>
+                        <td class="text-center">
+                          Diz İncinmesi
+                        </td>
+                        <td>
+                          <div class="clearfix">
+                            <div class="float-start">
+                              <div class="fw-semibold">50%</div>
+                            </div>
+                          </div>
+                          <div class="progress progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
+                              aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="small text-medium-emphasis">Giriş</div>
+                          <div class="fw-semibold">10 saniye önce</div>
+                        </td>
+                        <td>
+                          <div class="dropdown">
+                            <button class="btn btn-transparent p-0" type="button" data-coreui-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="false">
+                              <svg class="icon">
+                                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-options"></use>
+                              </svg>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Profil</a><a
+                                class="dropdown-item" href="#">Düzenle</a><a class="dropdown-item" href="#">Egzersizler</a><a class="dropdown-item text-danger"
+                                href="#">Hesabı Kapat</a></div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr class="align-middle">
+                        <td class="text-center">
+                          <div class="avatar avatar-md"><img class="avatar-img" src="assets/img/avatars/default.jpg"
+                             ><span class="avatar-status bg-success"></span></div>
+                        </td>
+                        <td>
+                          <div>Sevgi Nişancı</div>
+                          <div class="small text-medium-emphasis">Kayıt Tarihi: Aralık 1, 2020</div>
+                        </td>
+                        <td class="text-center">
+                          Diz İncinmesi
+                        </td>
+                        <td>
+                          <div class="clearfix">
+                            <div class="float-start">
+                              <div class="fw-semibold">50%</div>
+                            </div>
+                          </div>
+                          <div class="progress progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
+                              aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="small text-medium-emphasis">Giriş</div>
+                          <div class="fw-semibold">10 saniye önce</div>
+                        </td>
+                        <td>
+                          <div class="dropdown dropup">
+                            <button class="btn btn-transparent p-0" type="button" data-coreui-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="false">
+                              <svg class="icon">
+                                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-options"></use>
+                              </svg>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Profil</a><a
+                                class="dropdown-item" href="#">Düzenle</a><a class="dropdown-item" href="#">Egzersizler</a><a class="dropdown-item text-danger"
+                                href="#">Hesabı Kapat</a></div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr class="align-middle">
+                        <td class="text-center">
+                          <div class="avatar avatar-md"><img class="avatar-img" src="assets/img/avatars/default.jpg"
+                             ><span class="avatar-status bg-success"></span></div>
+                        </td>
+                        <td>
+                          <div>Sevgi Nişancı</div>
+                          <div class="small text-medium-emphasis">Kayıt Tarihi: Aralık 1, 2020</div>
+                        </td>
+                        <td class="text-center">
+                          Diz İncinmesi
+                        </td>
+                        <td>
+                          <div class="clearfix">
+                            <div class="float-start">
+                              <div class="fw-semibold">50%</div>
+                            </div>
+                          </div>
+                          <div class="progress progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
+                              aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="small text-medium-emphasis">Giriş</div>
+                          <div class="fw-semibold">10 saniye önce</div>
+                        </td>
+                        <td>
+                          <div class="dropdown dropup">
+                            <button class="btn btn-transparent p-0" type="button" data-coreui-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="false">
+                              <svg class="icon">
+                                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-options"></use>
+                              </svg>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Profil</a><a
+                                class="dropdown-item" href="#">Düzenle</a><a class="dropdown-item" href="#">Egzersizler</a><a class="dropdown-item text-danger"
+                                href="#">Hesabı Kapat</a></div>
+                          </div>
+                        </td>
+                      </tr>
+
+
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.col-->
+        </div>
+        <!-- /.row-->
+
+
+      </div>
+    </div>
+  </div>
+  <!-- CoreUI and necessary plugins-->
+  <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
+  <script src="vendors/simplebar/js/simplebar.min.js"></script>
+  <!-- Plugins and scripts required by this view-->
+  <script src="vendors/@coreui/utils/js/coreui-utils.js"></script>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/jquery.preloader.min.js"></script>
+  <script src="js/physapp.js"></script>
+  
+  <script>
+    $('body').preloader();
+    $(document).ready(function() {
+      physapp.fetchUserList();
+    });
+  </script>
+
+</body>
+
+</html>

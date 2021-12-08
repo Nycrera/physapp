@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="author" content="Alperen Yurdakul">
+  <title>Admin Paneli</title>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Vendors styles-->
+  <link rel="stylesheet" href="vendors/simplebar/css/simplebar.css">
+  <link rel="stylesheet" href="css/vendors/simplebar.css">
+  <!-- Main styles for this application-->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+    <header class="header header-sticky mb-4">
+      <div class="container-fluid">
+        <ul class="header-nav d-none d-md-flex">
+          <li class="nav-item"><a class="nav-link" href="admin_dashboard">Genel Görüş</a></li>
+          <li class="nav-item"><a class="nav-link" href="registerUser">Yeni Kullanıcı Kaydı</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Site Ayarları</a></li>
+        </ul>
+        <ul class="header-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#">
+              <svg class="icon icon-lg">
+                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+              </svg></a></li>
+        </ul>
+        <ul class="header-nav ms-3">
+          <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button"
+              aria-haspopup="true" aria-expanded="false">
+              <div class="avatar avatar-md"><img class="avatar-img" src="assets/img/avatars/default.jpg">
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end pt-0">
+              <div class="dropdown-header bg-light py-2">
+                <div class="fw-semibold">Admin Hesabı</div>
+              </div><a class="dropdown-item" href="#">
+                <svg class="icon me-2">
+                  <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+                </svg> Profil</a><a class="dropdown-item" href="#">
+                <svg class="icon me-2">
+                  <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-settings"></use>
+                </svg> Ayarlar</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="logout">
+                <svg class="icon me-2">
+                  <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
+                </svg> Çıkış</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="header-divider"></div>
+      <div class="container-fluid">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb my-0 ms-2">
+            <li class="breadcrumb-item">
+              <!-- if breadcrumb is single--><span>Ana Sayfa</span>
+            </li>
+            <li class="breadcrumb-item active"><span>Egzersiz Oluştur - Düzenle</span></li>
+          </ol>
+        </nav>
+      </div>
+    </header>
+    <div class="body flex-grow-1 px-3">
+      <div class="container-lg">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <div class="card-header">Yeni Egzersiz Oluşturma</div>
+              <div class="card-body">
+                <span id="alertBox1"></span>
+                <div class="mb-3">
+                  <label class="form-label" for="exerciseName">Egzersiz İsmi</label>
+                  <input class="form-control" id="exerciseName1" name="name" type="text"
+                    placeholder="Yeni Egzersiz İsmi">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="formFile">Egzersiz Videosu</label>
+                  <select id="videoSelect1" name="videoId" class="form-select" aria-label="Default select example">
+                    <option value="0">Var olan videolardan seçin</option>
+                    <% for(var i=0; i<videos.length;i++) { %>
+                      <option value="<%= videos[i].id %>">
+                        <%= videos[i].name %>
+                      </option>
+                      <% } %>
+                  </select>
+                </div>
+                <div id="videoElement1" style="display: none;" class="mb-3">
+                  <video width="320" height="240" controls>
+                    <source src="" type="video/mp4">
+                    Tarayıcı video gösterimini desteklemiyor.
+                  </video>
+                </div>
+                <button class="btn btn-primary mb-3" id="button1">Oluştur</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <div class="card-header">Egzersiz Düzenle</div>
+              <div class="card-body">
+                <span id="alertBox2"></span>
+                <div class="mb-3">
+                  <select id="exerciseSelect2" name="editId" class="form-select" aria-label="Default select example">
+                    <option value="0">Düzenlemek istediğiniz egzersizi seçin</option>
+                    <% for(var i=0; i<exercises.length;i++) { %>
+                      <option value="<%= exercises[i].id %>">
+                        <%= exercises[i].name %>
+                      </option>
+                      <% } %>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="exerciseName2">Egzersiz İsmi</label>
+                  <input class="form-control" id="exerciseName2" name="editName" type="text"
+                    placeholder="Egzersiz İsmi">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="formFile">Egzersiz Videosu</label>
+                  <select id="videoSelect2" name="videoId" class="form-select" aria-label="Default select example">
+                    <option value="0">Var olan videolardan seçin</option>
+                    <% for(var i=0; i<videos.length;i++) { %>
+                      <option value="<%= videos[i].id %>">
+                        <%= videos[i].name %>
+                      </option>
+                      <% } %>
+                  </select>
+                  <div id="videoElement2" style="display: none;" class="mb-3">
+                    <video width="320" height="240" controls>
+                      <source src="" type="video/mp4">
+                      Tarayıcı video gösterimini desteklemiyor.
+                    </video>
+                  </div>
+                </div>
+                <button class="btn btn-primary mb-3" id="button2">Güncelle</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <div class="card-header">Yeni Video Yükle</div>
+              <div class="card-body">
+                <span id="alertBox3"></span>
+                <div class="mb-3">
+                  <label class="form-label" for="videoName">Video İsmi</label>
+                  <input class="form-control" id="videoName" name="videoName" type="text"
+                    placeholder="Daha sonra tanımanız için bir isim">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="formFile">Egzersiz Videosu</label>
+                  <input class="form-control" id="formFile" name="file" type="file">
+                </div>
+                <button class="btn btn-primary mb-3" id="button3">Yükle</button>
+                <div class="progress">
+                  <div id="vid-progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
+                    aria-valuemax="100">0%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.col-->
+  </div>
+  <!-- /.row-->
+
+
+  </div>
+  </div>
+
+
+  </div>
+  <!-- CoreUI and necessary plugins-->
+  <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
+  <script src="vendors/simplebar/js/simplebar.min.js"></script>
+  <!-- Plugins and scripts required by this view-->
+  <script src="vendors/@coreui/utils/js/coreui-utils.js"></script>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/physapp.js"></script>
+  <script type='text/javascript'>
+    var exercises =<% -JSON.stringify(exercises) %>;
+  </script>
+  <script>
+    $('button1').on('click',function(){
+      //Create exercise
+      var name = document.getElementById("exerciseName1").value; 
+      var videoId = parseInt(document.getElementById("videoSelect1").value);
+      if(!name){
+        physapp.createClosableAlert("danger","Egzersiz için bir isim yazmalısın.","alertBox1");
+        return;
+      }
+      if(!videoId){
+        physapp.createClosableAlert("danger","Video seçilmedi.","alertBox1");
+        return;
+      }
+      physapp.creatExercise(name, videoId, (err,data)=>{
+        if(err){
+          physapp.createClosableAlert("danger","Egzersiz oluştururken sunucu hatası ile karşılaşıldı.","alertBox1");
+        }else{
+          exercises.push(data);
+          $('#exerciseSelect2').append('<option value="'+ data.id +'">'+ data.name +'</option>');
+          physapp.createClosableAlert("success","Yeni egzersiz oluşturuldu.","alertBox1");
+        }
+      });
+    });
+
+    $('button2').on('click',function(){
+      //Edit exercise
+      var name = document.getElementById('exerciseName2').value;
+      var exerciseId = parseInt(document.getElementById("exerciseSelect2").value);
+      if(!name) name = document.getElementById('exerciseName2').placeholder;
+      var videoId = parseInt(document.getElementById('videoSelect2').value);
+      if(!videoId){
+        physapp.createClosableAlert("danger","Video seçilmedi.","alertBox2");
+        return;
+      }
+      physapp.updateExercise(exerciseId,{name:name, video:videoId},(err)=>{
+        if(err){
+          physapp.createClosableAlert("danger","Egzersiz düzenlenirken sunucu hatası ile karşılaşıldı.","alertBox2");
+        }else{
+          var exercise = exercises.find(o => o.id == exerciseId);
+          exercise.name = name;
+          exercise.video = videoId;
+          $('option[value="'+ exerciseId +'"]').text(name);
+          physapp.createClosableAlert("success","Egzersiz düzenlendi.","alertBox2");
+        }
+      });
+    });
+
+    $('button3').on('click',function(){
+      // Upload video file with name
+      var name = document.getElementById('videoName').value;
+      physapp.uploadVideo(name, document.getElementById('formFile').files[0], document.getElementById('vid-progress-bar'), function(err,id){
+        if(err){
+          physapp.createClosableAlert("danger","Video yüklenirken sunucu hatası ile karşılaşıldı.","alertBox3");
+        }else{
+          var newOption = '<option value="'+ id +'">'+ name +'</option>';
+          $('#videoSelect1').append(newOption);
+          $('#videoSelect2').append(newOption);
+          physapp.createClosableAlert("success","Vide başarıyla yüklendi.","alertBox3");
+        }
+      });
+    });
+
+
+    $('#exerciseSelect2').on('change', function () {
+      if(parseInt(this.value)){
+        let selectedExercise = exercises.find(o => o.id == parseInt(this.value));
+        $('#exerciseName2').attr('placeholder',selectedExercise.name);
+        $('#videoSelect2').val(selectedExercise.video);
+        $('#videoSelect2').trigger('change');
+      }else{
+        $('#exerciseName2').attr('placeholder','Egzersiz İsmi');
+      }
+    });
+
+    $('#videoSelect1').on('change', function () {
+      if (parseInt(this.value)) {
+        $('#videoElement1 > video > source').attr('src','videos/id_'+ parseInt(this.value) + '.mp4');
+        $('#videoElement1').show();
+        document.querySelector("#videoElement1 > video").load();
+      }else{
+        $('#videoElement1').hide();
+      }
+    });
+
+    $('#videoSelect2').on('change', function () {
+      if (parseInt(this.value)) {
+        $('#videoElement2 > video > source').attr('src','videos/id_'+ parseInt(this.value) + '.mp4');
+        $('#videoElement2').show();
+        document.querySelector("#videoElement2 > video").load();
+      }else{
+        $('#videoElement2').hide();
+      }
+    });
+
+  </script>
+</body>
+
+</html>

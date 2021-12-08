@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="author" content="Alperen Yurdakul">
+  <title>Admin Paneli</title>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Vendors styles-->
+  <link rel="stylesheet" href="vendors/simplebar/css/simplebar.css">
+  <link rel="stylesheet" href="css/vendors/simplebar.css">
+  <!-- Main styles for this application-->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+    <header class="header header-sticky mb-4">
+      <div class="container-fluid">
+        <ul class="header-nav d-none d-md-flex">
+          <li class="nav-item"><a class="nav-link" href="admin_dashboard">Genel Görüş</a></li>
+          <li class="nav-item"><a class="nav-link" href="registerUser">Yeni Kullanıcı Kaydı</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Site Ayarları</a></li>
+        </ul>
+        <ul class="header-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#">
+              <svg class="icon icon-lg">
+                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+              </svg></a></li>
+        </ul>
+        <ul class="header-nav ms-3">
+          <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button"
+              aria-haspopup="true" aria-expanded="false">
+              <div class="avatar avatar-md"><img class="avatar-img" src="assets/img/avatars/default.jpg">
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end pt-0">
+              <div class="dropdown-header bg-light py-2">
+                <div class="fw-semibold">Admin Hesabı</div>
+              </div><a class="dropdown-item" href="#">
+                <svg class="icon me-2">
+                  <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+                </svg> Profil</a><a class="dropdown-item" href="#">
+                <svg class="icon me-2">
+                  <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-settings"></use>
+                </svg> Ayarlar</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="logout">
+                <svg class="icon me-2">
+                  <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
+                </svg> Çıkış</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="header-divider"></div>
+      <div class="container-fluid">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb my-0 ms-2">
+            <li class="breadcrumb-item">
+              <!-- if breadcrumb is single--><span>Ana Sayfa</span>
+            </li>
+            <li class="breadcrumb-item active"><span>Kullanıcı Profili</span></li>
+          </ol>
+        </nav>
+      </div>
+    </header>
+    <div class="body flex-grow-1 px-3">
+      <div class="container-lg">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <div class="card-header"><%= user.name %> <%= user.surname %></div>
+              <div class="card-body">
+                  
+              </div>
+            </div>
+          </div>
+          <!-- /.col-->
+        </div>
+        <!-- /.row-->
+      </div>
+      <div class="body flex-grow-1 px-3">
+        <div class="container-lg">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card mb-4">
+                <div class="card-header">Egzersizler</div>
+                <div class="card-body">
+                  <div class="row">
+                  <div class="col-4">
+                    <h4>Atanmış Egzersizler:</h3><br>
+                    <ul id="listAssignedExercises" class="list-group">
+                      <% for(var i=0; i<user_exercises.length;i++) { %>
+                      <li id="assignedItem<%= user_exercises[i].id %>" class="list-group-item">
+                        <span class="align-middle">
+                          <%= exercises.find(o => o.id == user_exercises[i].id).name %>
+                          <button onclick="physapp.unAssign(<%= user_exercises[i].id %>)" class="btn btn-danger float-end" type="button">Kaldır</button>
+                        </span>
+                        </li>
+                        <% } %>
+                    </ul>
+                  </div>
+                  <div class="col-6">
+                    <h4>Yeni Egzersiz Ata:</h4><br>
+                    <span id="alertBox1"></span>
+                    <div class="mb-3">
+                      <select id="exerciseSelect2" name="editId" class="form-select" aria-label="Default select example">
+                        <option value="0">Atamak istediğiniz egzersizi seçin</option>
+                        <% for(var i=0; i<exercises.length;i++) { %>
+                          <option value="<%= exercises[i].id %>">
+                            <%= exercises[i].name %>
+                          </option>
+                          <% } %>
+                      </select>
+                      <br>
+                      <div id="videoElement2" class="mb-3 float-end" style="display: none;">
+                        <video width="320" height="240" controls>
+                          <source src="videos/id_x.mp4" type="video/mp4">
+                          Tarayıcı video gösterimini desteklemiyor.
+                        </video>
+                      </div>
+                      <br>
+                      <button id="btn1" class="btn btn-success" type="button">Egzersiz Ekle</button>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.col-->
+          </div>
+          <!-- /.row-->
+        </div>
+        <div class="body flex-grow-1 px-3">
+          <div class="container-lg">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card mb-4">
+                  <div class="card-header">Notlar</div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-4">
+                        <h4>Başlangıç Yorumları:</h4>
+                        <div class="form-floating">
+                          <textarea class="form-control" id="floatingTextarea1" placeholder="Leave a comment here" style="height: 200px"></textarea>
+                          <label for="floatingTextarea2">Comments</label>
+                        </div>
+                        <br>
+                        <button id="btn2" class="btn btn-success" type="button">Kaydet</button>
+                      </div>
+                      <div class="col-4">
+                        <h4>Bitiş Yorumları:</h4>
+                        <div class="form-floating">
+                          <textarea class="form-control" id="floatingTextarea2" placeholder="Leave a comment here" style="height: 200px"></textarea>
+                          <label for="floatingTextarea2">Comments</label>
+                        </div>
+                        <br>
+                        <button id="btn3" class="btn btn-success" type="button">Kaydet</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.col-->
+            </div>
+            <!-- /.row-->
+          </div>
+    </div>
+  </div>
+  <!-- CoreUI and necessary plugins-->
+  <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
+  <script src="vendors/simplebar/js/simplebar.min.js"></script>
+  <!-- Plugins and scripts required by this view-->
+  <script src="vendors/@coreui/utils/js/coreui-utils.js"></script>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/physapp.js"></script>
+  <script>
+    $("#btn1").on('click',()=>{
+      let value = parseInt(document.getElementById('exerciseSelect2').value);
+      if(!value){
+        phyaspp.createClosableAlert('danger',"Lütfen kullanıcıya eklemek istediğiniz egzersizi seçin.",'alertBox1');
+        return;
+      }
+      physaspp.Assign(value,<%- client.id %>);
+    });
+    $("#btn2").on('click', ()=>{
+       // TODO
+    });
+    $("#btn3").on('click', ()=>{
+      // TODO
+    });
+  </script>
+
+</body>
+
+</html>
