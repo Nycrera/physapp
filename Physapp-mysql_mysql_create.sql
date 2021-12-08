@@ -13,10 +13,10 @@ CREATE TABLE `clients` (
 	`surname` varchar(255) NOT NULL,
 	`note_start` mediumtext,
 	`note_end` mediumtext,
-	`register_date` DATETIME NOT NULL DEFAULT 'NOW()',
-	`lastlogin` DATETIME NOT NULL DEFAULT 'NOW()',
+	`register_date` DATETIME NOT NULL DEFAULT NOW(),
+	`lastlogin` DATETIME NOT NULL DEFAULT NOW(),
 	`sickness` TEXT,
-	`disabled` bool NOT NULL DEFAULT 'FALSE',
+	`disabled` bool NOT NULL DEFAULT FALSE,
 	PRIMARY KEY (`id`)
 );
 
@@ -24,10 +24,10 @@ CREATE TABLE `user_exercises` (
 	`id` int NOT NULL AUTO_INCREMENT UNIQUE,
 	`client` int NOT NULL,
 	`exercise` int NOT NULL,
-	`done` bool NOT NULL DEFAULT '0',
-	`assign_time` DATETIME NOT NULL DEFAULT 'NOW()',
+	`done` bool NOT NULL DEFAULT FALSE,
+	`assign_time` DATETIME NOT NULL DEFAULT NOW(),
 	`expiration_time` DATETIME NOT NULL,
-	`disabled` bool NOT NULL DEFAULT 'FALSE',
+	`disabled` bool NOT NULL DEFAULT FALSE,
 	PRIMARY KEY (`id`)
 );
 
