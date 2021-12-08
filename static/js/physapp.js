@@ -60,8 +60,8 @@ physapp.unAssign = function(exerciseId){
 physapp.disableUser = function(id) {
   $.ajax({
     type: 'POST',
-    url: 'adminAPI/updateUser',
-    data: JSON.stringify({id:id,update:{'disabled':true}}),
+    url: 'adminAPI/killUser',
+    data: JSON.stringify({id:id,disabled:true}),
     success: function() { 
       $('body').preloader('remove');
       alert('Kullanıcı hesabı kapatıldı.');
