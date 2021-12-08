@@ -4,6 +4,7 @@ const port = 1496;
 
 
 var session = require('express-session');
+var multer = require('multer');
 
 app.set('trust proxy', 'loopback');
 app.set('view engine', 'ejs');
