@@ -4,7 +4,7 @@ function get(req, res, next) {
     if (req.session.loggedIn) {
         res.redirect('/dashboard');
     } else {
-        res.render(path.join(__dirname, '../static/login.html');
+        res.render(path.join(__dirname, '../static/login.html'));
     }
 
 }
