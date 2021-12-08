@@ -1,5 +1,5 @@
 module.exports = function (req, res, next) {
-    let db = require('../helpers/database')(require('../config.json'));
+    let db = require('../../helpers/database')(require('../config.json'));
     db.query('SELECT * FROM clients WHERE disabled != TRUE', [req.session.userId], (err, result) => {
         if (err) console.log(err);
         let countOfUsers = result.length;

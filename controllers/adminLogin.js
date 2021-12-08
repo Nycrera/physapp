@@ -17,7 +17,7 @@ function post(req, res, next) {
             req.session.loggedIn = true;
             req.session.isAdmin = true;
             req.session.adminId = id;
-            res.redirect('/dashboard');
+            res.redirect('/admin_dashboard');
         } else {
             res.render(path.join(__dirname,'../pages/admin_login.html'), {danger: "Giriş Başarısız: Kullanıcı adı veya şifre hatalı girildi."});
         }
