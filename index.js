@@ -8,7 +8,10 @@ var session = require('express-session');
 var multer = require('multer');
 
 app.set('trust proxy', 'loopback');
-app.set('view engine', 'ejs');
+
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+
 app.use(session({ secret: 'Keep it secret', resave: true,name: 'uniqueSessionID', saveUninitialized: false }));
 
 const admin_auth = require('./middleware/adminAuth');
