@@ -13,7 +13,7 @@ function get(req, res, next) {
                 res.redirect('/admin_dashboard');
             }else{
                 let user = result[0];
-                res.render(path.join(__dirname,'../static/edituser.html'),{user:user});
+                res.render(path.join(__dirname,'../pages/edituser.html'),{user:user});
             }
         });
     }
@@ -30,9 +30,9 @@ function post(req, res, next){
             let user = result[0];
             if(err){
                 console.log(err);
-                res.render(path.join(__dirname,'../static/edituser.html'),{user:user, danger:'Kullanıcı güncellemesi sırasında hata.'});
+                res.render(path.join(__dirname,'../pages/edituser.html'),{user:user, danger:'Kullanıcı güncellemesi sırasında hata.'});
             }else{
-                res.render(path.join(__dirname,'../static/edituser.html'),{user:user, success:'Kullanıcı başarıyla güncellendi.'});
+                res.render(path.join(__dirname,'../pages/edituser.html'),{user:user, success:'Kullanıcı başarıyla güncellendi.'});
             }
         });
         });

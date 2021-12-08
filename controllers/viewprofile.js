@@ -17,7 +17,7 @@ module.exports = function(req, res, next){
                 return;
             }
             var client = clients[0];
-            res.render(path.join(__dirname,'../static/viewprofile.html'), {client:client, exercises:exercises, user_exercises: user_exercises/*USER DATA*/} );
+            res.render(path.join(__dirname,'../pages/viewprofile.html'), {client:client, exercises:exercises, user_exercises: user_exercises/*USER DATA*/} );
         });
         });
     });

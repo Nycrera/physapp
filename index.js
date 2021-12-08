@@ -11,6 +11,8 @@ app.set('trust proxy', 'loopback');
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+app.use(express.static('static'));
+
 
 app.use(session({ secret: 'Keep it secret', resave: true,name: 'uniqueSessionID', saveUninitialized: false }));
 
@@ -33,7 +35,7 @@ app.get('/', (req, res) => {
 
 //admin Pages
 app.get('/admin_dashboard', admin_auth, (req, res) => {
-    res.render(path.join(__dirname,'./static/admin_dashboard.html'));
+    res.render(path.join(__dirname,'./pages/admin_dashboard.html'));
 });
 
 app.get('/registerUser',admin_auth,require('./controllers/register')[0]);

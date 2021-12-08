@@ -6,7 +6,7 @@ function get(req, res, next) {
     if (req.session.loggedIn) {
         res.redirect('/admin_dashboard');
     } else {
-        res.render(path.join(__dirname,'../static/admin_login.html'));
+        res.render(path.join(__dirname,'../pages/admin_login.html'));
     }
 
 }
@@ -19,7 +19,7 @@ function post(req, res, next) {
             req.session.adminId = id;
             res.redirect('/dashboard');
         } else {
-            res.render(path.join(__dirname,'../static/admin_login.html'), {danger: "Giriş Başarısız: Kullanıcı adı veya şifre hatalı girildi."});
+            res.render(path.join(__dirname,'../pages/admin_login.html'), {danger: "Giriş Başarısız: Kullanıcı adı veya şifre hatalı girildi."});
         }
     });
 };

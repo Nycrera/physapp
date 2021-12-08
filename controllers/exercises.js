@@ -8,7 +8,7 @@ module.exports = function(req, res){
                 console.log(err);
                 console.log(err2);
             }
-            res.render(path.join(__dirname,'../static/exercises.html'),{exercises:exercises, videos:videos});
+            res.render(path.join(__dirname,'../pages/exercises.html'),{exercises:exercises, videos:videos});
         });
     });
 }

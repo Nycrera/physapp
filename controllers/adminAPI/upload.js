@@ -5,7 +5,7 @@ module.exports = function (req, res, next) {
   let db = require('../helpers/database')(require('../config.json'));
   db.query('INSERT INTO videos (name) VALUES (?)', [req.body.name], (err, result) => {
     const tempPath = req.file.path;
-    const targetPath = path.join(__dirname, "../../static/videos/", 'id_' + result.insertId.toString() /* Video filename/id */);
+    const targetPath = path.join(__dirname, "../../pages/videos/", 'id_' + result.insertId.toString() /* Video filename/id */);
     if (path.extname(req.file.originalname).toLowerCase() === ".mp4") {
       fs.rename(tempPath, targetPath, err => {
         if (err) return handleError(err, res);
