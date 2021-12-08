@@ -2,8 +2,11 @@ const express = require('express');
 const app = express();
 const port = 1496;
 
+
+var session = require('express-session');
+
 app.set('trust proxy', 'loopback');
-//app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 app.use(session({ secret: 'Keep it secret', name: 'uniqueSessionID', saveUninitialized: false }));
 
 const admin_auth = require('./middleware/adminAuth');
