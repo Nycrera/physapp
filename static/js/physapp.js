@@ -65,7 +65,7 @@ physapp.disableUser = function(id) {
     success: function() { 
       $('body').preloader('remove');
       alert('Kullanıcı hesabı kapatıldı.');
-      history.back();
+      document.referrer ? window.location = document.referrer : history.back()
      },
     fail: function(){
       alert("Erişim Hatası: İstek Başarısız");
