@@ -25,8 +25,8 @@
                 <div class="card-body">
                   <form method="POST">
                   <h1>Yeni Kullanıcı Kaydı</h1>
-                  <% if(success){ %> <div class="alert alert-success" role="alert"><%= success%></div> <% } %>
-                  <% if(danger){ %> <div class="alert alert-danger" role="alert"><%= danger%></div> <% } %>
+                  <% if(typeof(success) != "undefined"){ %> <div class="alert alert-success" role="alert"><%= success%></div> <% } %>
+                  <% if(typeof(danger) != "undefined"){ %> <div class="alert alert-danger" role="alert"><%= danger%></div> <% } %>
                   <div class="input-group mb-3"><span class="input-group-text">
                       <svg class="icon">
                         <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>

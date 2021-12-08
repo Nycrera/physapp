@@ -26,7 +26,7 @@
                   <form method="POST">
                   <h1>Kullanıcı Girişi</h1>
                   <p class="text-medium-emphasis">Devam etmek için giriş yapınız.</p>
-                  <% if(danger){ %><div class="alert alert-danger" role="alert"><%= danger %></div> <% } %>
+                  <% if(typeof(danger) != "undefined"){ %><div class="alert alert-danger" role="alert"><%= danger %></div> <% } %>
                   <div class="input-group mb-3"><span class="input-group-text">
                       <svg class="icon">
                         <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>

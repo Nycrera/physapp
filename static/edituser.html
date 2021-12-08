@@ -77,8 +77,8 @@
               <div class="card-header">Kullanıcı Düzenle: <%= user.name %> <%= user.surname %></div>
               <div class="card-body">
                 <form method="POST">
-                  <% if(success){ %> <div class="alert alert-success" role="alert"><%= success%></div> <% } %>
-                  <% if(danger){ %> <div class="alert alert-danger" role="alert"><%= danger%></div> <% } %>
+                  <% if(typeof(success) != "undefined"){ %> <div class="alert alert-success" role="alert"><%= success%></div> <% } %>
+                  <% if(typeof(danger) != "undefined"){ %> <div class="alert alert-danger" role="alert"><%= danger%></div> <% } %>
                   
                   <div style="display: block;margin-left: auto; margin-right: auto;" class="avatar avatar-lg mb-3">
                     <img class="avatar-img" src="assets/img/avatars/default.jpg">
