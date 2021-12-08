@@ -24,7 +24,7 @@
               <div class="card col-md-7 p-4 mb-0">
                 <div class="card-body">
                   <h1>Hesap Kapatma</h1>
-                  <p class="text-medium-emphasis"><b id="userInfo">Sabiha Gökçen (ID: 1)</b><br>Bu hesabı kapatmak istediğinize emin misiniz?<br> (Bu geri döndürülebilir bir işlem, veriler silinmez)</p>
+                  <p class="text-medium-emphasis"><b id="userInfo"><%= name %> (ID: <%= id %>))</b><br>Bu hesabı kapatmak istediğinize emin misiniz?<br> (Bu geri döndürülebilir bir işlem, veriler silinmez)</p>
 
                   <div class="row">
                     <div class="col-6">
@@ -45,11 +45,9 @@
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/physapp.js"></script>
 
-    <script>
-      var getUrlParameter = function getUrlParameter(sParam) {var sPageURL = window.location.search.substring(1),sURLVariables = sPageURL.split('&'),sParameterName,i;for (i = 0; i < sURLVariables.length; i++) {sParameterName = sURLVariables[i].split('=');if (sParameterName[0] === sParam) {return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);}}return false;};
-      document.getElementById("userInfo").innerText = getUrlParameter('name') + ' (ID: '+ getUrlParameter('id') + ')';
+    <script>    
       document.getElementById("confirmBtn").onclick(()=>{
-        physapp.disableUser(parseInt(getUrlParameter('id')));
+        physapp.disableUser(<%- userId %>);
       });
     </script>
 

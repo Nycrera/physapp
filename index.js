@@ -38,10 +38,12 @@ app.get('/admin_dashboard', admin_auth, (req, res) => {
     res.render(path.join(__dirname,'./pages/admin_dashboard.html'));
 });
 
+
 app.get('/registerUser',admin_auth,require('./controllers/register')[0]);
 app.post('/registerUser',admin_auth, express.urlencoded({ extended: true }), require('./controllers/register')[1]);
 app.get('/editUser', admin_auth, require('./controllers/editUser')[0]);
 app.post('/editUser', admin_auth, express.urlencoded({ extended: true }), require('./controllers/editUser')[1]);
+app.get('/killaccount',admin_auth,require('./controllers/killAccount'));
 app.get('/exercises', admin_auth, require('./controllers/exercises'));
 app.get('/viewprofile', admin_auth, require('./controllers/viewprofile'));
 
