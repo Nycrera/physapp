@@ -69,13 +69,13 @@
       </nav>
     </div>
   </header>
-
+ 
   <section class="u-clearfix u-palette-1-base u-section-2" id="sec-d2ad">
     <div
       class="u-clearfix u-sheet u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-valign-top-lg u-valign-top-xl u-sheet-1">
       <div id="carousel-8d1d" data-interval="false" class="u-carousel u-expanded-width u-slider u-slider-1">
-        <ol class="u-absolute-hcenter u-carousel-indicators u-carousel-indicators-1" style="width: <%- 28*exercises.length %>px;">
-          <% for(int i=0;i<exercises.length;i++){ %>
+        <ol class="u-absolute-hcenter u-carousel-indicators u-carousel-indicators-1" style="width: <%- (28*exercises.length).toString() %>px;">
+          <% for(var i=0;i<exercises.length;i++){ %>
           <li data-u-target="#carousel-8d1d"
             class="<% if(i == 0){ %>u-active <% } %>u-active-palette-3-base u-hover-palette-3-base u-palette-1-light-3 u-shape-circle"
             style="width: 30px; height: 22px;"></li>
@@ -103,7 +103,7 @@
             </div>
           </div>
 
-          <% for(int i=1;i<exercises.length;i++) { %>
+          <% for(var i=1;i<exercises.length;i++) { %>
           <!-- start item-->
           <div class="u-carousel-item u-container-style u-expanded-width u-slide">
             <div class="u-container-layout u-container-layout-1">
