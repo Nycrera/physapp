@@ -17,7 +17,7 @@ module.exports = function (req, res, next) {
                     if (err2) console.log(err2);
                     exercisesData.push({ id: el.id,name: result2[0].name ,typeId: result2[0].id, video: result2[0].video, done: el.done });
                     if (exercisesProcessed == countOfRows) {
-                        res.render(path.join(__dirname, '../pages/dashboard.html'), { exercises: exerciseData });
+                        res.render(path.join(__dirname, '../pages/dashboard.html'), { exercises: exercisesData });
                     }
                 });
             });
