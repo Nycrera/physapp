@@ -28,10 +28,10 @@ module.exports = function (req, res, next) {
 }
 
 function getProgress(db, uid, cb) {
-    db.query("SELECT * FROM user_exercises WHERE expiration_time >= NOW() AND disabled != TRUE AND client = ?", [uid], (err, result) => {
+    db.query("SELECT * FROM user_exercises WHERE expiration_time >= NOW() AND disabled = FALSE AND client = ?", [uid], (err, result) => {
         let count = 0;
         result.forEach(el =>{
-            if(!result.disabled) count++;
+            if(el.done) count++;
         });
         cb(Math.round(count / result.length * 100));
     });
