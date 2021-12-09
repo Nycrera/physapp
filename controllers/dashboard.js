@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
         if (err) console.log(err);
         let countOfRows = result.length;
         let exercisesProcessed = 0;
-        let exercisesData = { exercises: [] };
+        let exercisesData = [];
         if (countOfRows == 0) {
             res.render(path.join(__dirname, '../pages/dashboard_empty.html'));
             return;
@@ -15,7 +15,7 @@ module.exports = function (req, res, next) {
                 db.query('SELECT * FROM exercises WHERE id = ?', [el.exercise], (err2, result2) => {
                     exercisesProcessed++;
                     if (err2) console.log(err2);
-                    exercisesData.exercises.push({ id: el.id,name: result2[0].name ,typeId: result2[0].id, video: result2[0].video, done: el.done });
+                    exercisesData.push({ id: el.id,name: result2[0].name ,typeId: result2[0].id, video: result2[0].video, done: el.done });
                     if (exercisesProcessed == countOfRows) {
                         res.render(path.join(__dirname, '../pages/dashboard.html'), { exercises: exerciseData });
                     }
