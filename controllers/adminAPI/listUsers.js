@@ -12,6 +12,8 @@ module.exports = function (req, res, next) {
 
             result[index].register_date = formatDate(result[index].register_date);
             result[index].lastlogin = formatDate(result[index].lastlogin);
+            delete result[index].password; // We don't want to send passwords, even if they are hashed.
+            
             getProgress(db, user.id, (percentage) => {
                 usersProcessed++;
                 result[index].todayProgress = percentage;
