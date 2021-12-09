@@ -99,7 +99,7 @@
                       <li id="assignedItem<%= user_exercises[i].id %>" class="list-group-item">
                         <span class="align-middle">
                           <%= exercises.find(o => o.id == user_exercises[i].exercise).name %>
-                          <button onclick="physapp.unAssign(<%= user_exercises[i].id %>)" class="btn btn-danger float-end" type="button">Kaldır</button>
+                          <button onclick="physapp.unAssign(<%- user_exercises[i].id %>)" class="btn btn-danger float-end" type="button">Kaldır</button>
                         </span>
                         </li>
                         <% } %>

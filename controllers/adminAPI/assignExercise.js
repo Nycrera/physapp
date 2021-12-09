@@ -9,12 +9,12 @@ module.exports = function(req,res,next){
             return;
         }
         db.query('SELECT * FROM user_exercises WHERE id=?',[result.insertId], (err2,exerciseData)=>{
-            db.query('SELECT * FROM exercises WHERE id=?',[exerciseData.exercise], (err3,exerciseTypeData)=>{
+            db.query('SELECT * FROM exercises WHERE id=?',[exerciseData[0].exercise], (err3,exerciseTypeData)=>{
                 if(err2 || err3){
                     console.log(err2);
                     console.log(err3);
                 }
-            res.json({user_exercise:{id:result.insertId},exerciseType:exerciseTypeData});
+            res.json({user_exercise:{id:result.insertId},exerciseType:exerciseTypeData[0]});
         });
         });
 
