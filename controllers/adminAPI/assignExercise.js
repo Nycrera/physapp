@@ -10,6 +10,10 @@ module.exports = function(req,res,next){
         }
         db.query('SELECT (exercise) FROM user_exercises WHERE id=?',[result.insertId], (err2,exerciseData)=>{
             db.query('SELECT * FROM exercises WHERE id=?',[exerciseData.exercise], (err3,exerciseTypeData)=>{
+                if(err2 || err3){
+                    console.log(err2);
+                    console.log(err3);
+                }
             res.json({user_exercise:{id:result.insertId},exerciseType:exerciseTypeData});
         });
         });
