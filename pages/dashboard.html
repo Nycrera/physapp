@@ -7,10 +7,8 @@
   <title>Ana Sayfa</title>
   <link rel="stylesheet" href="css/page.css" media="screen">
   <script class="u-script" type="text/javascript" src="js/jquery-3.6.0.min.js" defer=""></script>
-  <script class="u-script" type="text/javascript" src="js/jquery.preloader.min.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="js/page.js" defer=""></script>
   <link id="u-theme-google-font" rel="stylesheet" href="fonts/font.css">
-  <link rel="stylesheet" href="css/preloader.css">
 </head>
 
 <body class="u-body">
@@ -70,16 +68,17 @@
       </nav>
     </div>
   </header>
- 
+
   <section class="u-clearfix u-palette-1-base u-section-2" id="sec-d2ad">
     <div
       class="u-clearfix u-sheet u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-valign-top-lg u-valign-top-xl u-sheet-1">
       <div id="carousel-8d1d" data-interval="false" class="u-carousel u-expanded-width u-slider u-slider-1">
-        <ol class="u-absolute-hcenter u-carousel-indicators u-carousel-indicators-1" style="width: <%- (28*exercises.length).toString() %>px;">
+        <ol class="u-absolute-hcenter u-carousel-indicators u-carousel-indicators-1"
+          style="width: <%- (28*exercises.length).toString() %>px;">
           <% for(var i=0;i<exercises.length;i++){ %>
-          <li data-u-target="#carousel-8d1d"
-            class="<% if(i == 0){ %>u-active <% } %>u-active-palette-3-base u-hover-palette-3-base u-palette-1-light-3 u-shape-circle"
-            style="width: 30px; height: 22px;"></li>
+            <li data-u-target="#carousel-8d1d"
+              class="<% if(i == 0){ %>u-active <% } %>u-active-palette-3-base u-hover-palette-3-base u-palette-1-light-3 u-shape-circle"
+              data-u-slide-to="<%- i.toString() %>" style="width: 30px; height: 22px;"></li>
             <% } %>
         </ol>
         <div class="u-carousel-inner" role="listbox">
@@ -88,11 +87,18 @@
               <div
                 class="u-align-center-md u-align-center-sm u-align-center-xs u-align-right-lg u-align-right-xl u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-radius-20 u-shape-round u-white u-group-1">
                 <div class="u-container-layout u-valign-middle u-container-layout-2">
-                  <h3 class="u-text u-text-palette-1-base u-text-1"><%= exercises[0].name %></h3>
-                  <p class="u-text u-text-2"><%= exercises[0].description %></p>
+                  <h3 class="u-text u-text-palette-1-base u-text-1">
+                    <%= exercises[0].name %>
+                  </h3>
+                  <p class="u-text u-text-2">
+                    <%= exercises[0].description %>
+                  </p>
                   <br>
-                  <input onchange="updateStatus(<%- exercises[0].id %>,this.checked)" type="checkbox" class="u-btn-check" id="btn-check-outlined-<%- exercises[0].id %>" autocomplete="off"<% if(exercises[0].done){ %> checked<% } %>>
-                  <label class="u-btn u-btn-outline-primary" for="btn-check-outlined-<%- exercises[0].id %>">Egzersiz Tamamlandı</label>
+                  <input onchange="updateStatus(<%- exercises[0].id %>,this.checked)" type="checkbox"
+                    class="u-btn-check" id="btn-check-outlined-<%- exercises[0].id %>" autocomplete="off" <%
+                    if(exercises[0].done){ %> checked<% } %>>
+                    <label class="u-btn u-btn-outline-primary" for="btn-check-outlined-<%- exercises[0].id %>">Egzersiz
+                      Tamamlandı</label>
                 </div>
               </div>
               <video
@@ -105,29 +111,36 @@
           </div>
 
           <% for(var i=1;i<exercises.length;i++) { %>
-          <!-- start item-->
-          <div class="u-carousel-item u-container-style u-expanded-width u-slide">
-            <div class="u-container-layout u-container-layout-1">
-              <div
-                class="u-align-center-md u-align-center-sm u-align-center-xs u-align-right-lg u-align-right-xl u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-radius-20 u-shape-round u-white u-group-1">
-                <div class="u-container-layout u-valign-middle u-container-layout-2">
-                  <h3 class="u-text u-text-palette-1-base u-text-1"><%= exercises[i].name %></h3>
-                  <p class="u-text u-text-5"><%= exercises[i].description %></p>
-                  <br>
-                  <input onchange="updateStatus(<%- exercises[i].id %>,this.checked)" type="checkbox" class="u-btn-check" id="btn-check-outlined-<%- exercises[i].id %>" autocomplete="off"<% if(exercises[i].done){ %> checked<% } %>>
-                  <label class="u-btn u-btn-outline-primary" for="btn-check-outlined-<%- exercises[i].id %>">Egzersiz Tamamlandı</label>
+            <!-- start item-->
+            <div class="u-carousel-item u-container-style u-expanded-width u-slide">
+              <div class="u-container-layout u-container-layout-1">
+                <div
+                  class="u-align-center-md u-align-center-sm u-align-center-xs u-align-right-lg u-align-right-xl u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-radius-20 u-shape-round u-white u-group-1">
+                  <div class="u-container-layout u-valign-middle u-container-layout-2">
+                    <h3 class="u-text u-text-palette-1-base u-text-1">
+                      <%= exercises[i].name %>
+                    </h3>
+                    <p class="u-text u-text-5">
+                      <%= exercises[i].description %>
+                    </p>
+                    <br>
+                    <input onchange="updateStatus(<%- exercises[i].id %>,this.checked)" type="checkbox"
+                      class="u-btn-check" id="btn-check-outlined-<%- exercises[i].id %>" autocomplete="off" <%
+                      if(exercises[i].done){ %> checked<% } %>>
+                      <label class="u-btn u-btn-outline-primary"
+                        for="btn-check-outlined-<%- exercises[i].id %>">Egzersiz Tamamlandı</label>
+                  </div>
                 </div>
+                <video
+                  class="u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-image u-image-round u-radius-20 u-image-1"
+                  controls>
+                  <source src="videos/id_<%- exercises[i].video %>.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
               </div>
-              <video
-                class="u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-image u-image-round u-radius-20 u-image-1"
-                controls>
-                <source src="videos/id_<%- exercises[i].video %>.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
             </div>
-          </div>
-          <!-- end item -->
-          <% } %>
+            <!-- end item -->
+            <% } %>
         </div>
         <a class="u-absolute-vcenter u-carousel-control u-carousel-control-prev u-spacing-5 u-text-body-alt-color u-carousel-control-1"
           href="#carousel-8d1d" role="button" data-u-slide="prev">
@@ -171,22 +184,21 @@
   </section>
 
   <script>
-    function updateStatus(id,checked){
-    $('body').preloader();
-    $.ajax({
-    type: 'POST',
-    url: 'userAPI/updateStatus',
-    data: JSON.stringify({exercise: {id: id,done: checked}}),
-    success: function() { 
-      $('body').preloader('remove');
-    },
-    fail: function(){
-      alert("Erişim Hatası: İstek Başarısız");
-      location.reload();
-    },
-    contentType: "application/json",
-    dataType: 'json'
-});
+    function updateStatus(id, checked) {
+      $.ajax({
+        type: 'POST',
+        url: 'userAPI/updateStatus',
+        data: JSON.stringify({ exercise: { id: id, done: checked } }),
+        success: function () {
+
+        },
+        fail: function () {
+          alert("Erişim Hatası: İstek Başarısız");
+          location.reload();
+        },
+        contentType: "application/json",
+        dataType: 'json'
+      });
     }
 
   </script>
