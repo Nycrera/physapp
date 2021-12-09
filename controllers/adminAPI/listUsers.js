@@ -9,9 +9,9 @@ module.exports = function (req, res, next) {
             return;
         }
         result.forEach((user,index) => {
-            var moment = require('moment');
-            result[index].register_date = moment(result[index].register_date).format("DD-MM-YYYY hh:mm:ss");
-            result[index].lastlogin = moment(result[index].lastlogin).format("DD-MM-YYYY hh:mm:ss");
+
+            result[index].register_date = formatDate(result[index].register_date);
+            result[index].lastlogin = formatDate(result[index].lastlogin);
             getProgress(db, user.id, (percentage) => {
                 usersProcessed++;
                 result[index].todayProgress = percentage;
@@ -35,4 +35,10 @@ function getProgress(db, uid, cb) {
         });
         cb(Math.round(count / result.length * 100));
     });
+}
+
+function formatDate(date){
+    return date.getFullYear().toString()+"-"+((date.getMonth()+1).toString().length==2?(date.getMonth()+1).toString():"0"+(date.getMonth()+1).toString())+"-"+(date.getDate().toString().length==2?date.getDate().toString():"0"+date.getDate().toString())+" "+(date.getHours().toString().length==2?date.getHours().toString():"0"+date.getHours().toString())+":"+((parseInt(date.getMinutes()/5)*5).toString().length==2?(parseInt(date.getMinutes()/5)*5).toString():"0"+(parseInt(date.getMinutes()/5)*5).toString())+":00";
+    // format to type like 2015-03-31 13:35:00
+
 }
