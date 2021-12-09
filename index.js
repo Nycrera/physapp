@@ -63,9 +63,7 @@ app.post('/adminAPI/upload', admin_auth, upload.single('file'), require('./contr
 
 //user Pages
 
-app.get('/dashboard', auth, (req, res) => {
-    //send user dashboard
-});
+app.get('/dashboard', auth, require('./controllers/dashboard'));
 
 // USER API
 app.get('/userAPI/assignedExercises', auth, require('./controllers/userAPI/getExercises'));
