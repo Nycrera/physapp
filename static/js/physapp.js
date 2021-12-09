@@ -17,11 +17,11 @@ physapp.fetchUserList = function () { // Call as soon as possible, or after load
     });
 }
 
-physapp.Assign = function(exerciseType, clientId){
+physapp.Assign = function(exerciseTypeId, clientId){
   $.ajax({
     type: 'POST',
     url: 'adminAPI/assignExercise',
-    data: JSON.stringify({exerciseTypeId: exerciseType.id, clientId: clientId}),
+    data: JSON.stringify({exerciseTypeId: exerciseTypeId, clientId: clientId}),
     success: function(user_exercise) { 
       if(typeof(user_exercise) === 'string') user_exercise = JSON.parse(user_exercise);
       $('#listAssignedExercises').append(`<li id="assignedItem${user_exercise.id}" class="list-group-item">

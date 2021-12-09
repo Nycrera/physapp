@@ -180,7 +180,7 @@
   <script src="js/physapp.js"></script>
   <script>
     $('#exerciseSelect1').on('change',()=>{
-      if(parseInt(this.value)){
+      if(parseInt(document.getElementById('exerciseSelect1').value)){
         $('#videoElement1 > video > source').attr('src','videos/id_'+ parseInt(this.value) + '.mp4');
         $('#videoElement1').show();
         document.querySelector("#videoElement1 > video").load();
