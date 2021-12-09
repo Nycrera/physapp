@@ -22,14 +22,14 @@ physapp.Assign = function(exerciseTypeId, clientId){
     type: 'POST',
     url: 'adminAPI/assignExercise',
     data: JSON.stringify({exerciseTypeId: exerciseTypeId, clientId: clientId}),
-    success: function(user_exercise) { 
-      if(typeof(user_exercise) === 'string') user_exercise = JSON.parse(user_exercise);
-      $('#listAssignedExercises').append(`<li id="assignedItem${user_exercise.id}" class="list-group-item">
-      <span class="align-middle">${user_exercise.exerciseType.name}
-      <button onclick="physapp.unAssign(<%= ${user_exercise.id} %>,${clientId})" class="btn btn-danger float-end" type="button">Kaldır</button>
+    success: function(data) { 
+      if(typeof(data) === 'string') data = JSON.parse(data);
+      $('#listAssignedExercises').append(`<li id="assignedItem${data.user_exercise.id}" class="list-group-item">
+      <span class="align-middle">${data.exerciseType.name}
+      <button onclick="physapp.unAssign(<%= ${data.user_exercise.id} %>,${clientId})" class="btn btn-danger float-end" type="button">Kaldır</button>
       </span>
       </li>`);
-      $('#assignedItem'+user_exercise.id).fadeIn();
+      $('#assignedItem'+data.user_exercise.id).fadeIn();
     },
     fail: function(){
       alert("Erişim Hatası: İstek Başarısız");
