@@ -209,7 +209,7 @@
         physapp.createClosableAlert("danger","Video seçilmedi.","alertBox1");
         return;
       }
-      physapp.creatExercise(name, videoId, (err,data)=>{
+      physapp.createExercise(name, videoId, (err,data)=>{
         if(err){
           physapp.createClosableAlert("danger","Egzersiz oluştururken sunucu hatası ile karşılaşıldı.","alertBox1");
         }else{
