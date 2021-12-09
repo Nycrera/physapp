@@ -109,7 +109,7 @@
                     <h4>Yeni Egzersiz Ata:</h4><br>
                     <span id="alertBox1"></span>
                     <div class="mb-3">
-                      <select id="exerciseSelect1" name="editId" class="form-select" aria-label="Default select example">
+                      <select id="exerciseSelect1" class="form-select">
                         <option value="0">Atamak istediğiniz egzersizi seçin</option>
                         <% for(var i=0; i<exercises.length;i++) { %>
                           <option value="<%= exercises[i].id %>">
@@ -179,13 +179,14 @@
   <script src="js/jquery-3.6.0.min.js"></script>
   <script src="js/physapp.js"></script>
   <script>
-    $('#exerciseSelect1').on('change',()=>{
-      if(parseInt(document.getElementById('exerciseSelect1').value)){
-        $('#videoElement1 > video > source').attr('src','videos/id_'+ parseInt(document.getElementById('exerciseSelect1').value) + '.mp4');
+    /*$('#exerciseSelect1').on('change',()=>{
+      var value = parseInt(document.getElementById('exerciseSelect1').value);
+      if(value){
+        $('#videoElement1 > video > source').attr('src','videos/id_'+ value + '.mp4');
         $('#videoElement1').show();
         document.querySelector("#videoElement1 > video").load();
       }
-    });
+    });*/
 
 
     $("#btn1").on('click',()=>{
