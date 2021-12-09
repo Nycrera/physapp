@@ -120,7 +120,7 @@
                       <br>
                       <div id="videoElement1" class="mb-3 float-end" style="display: none;">
                         <video width="320" height="240" controls>
-                          <source src="" type="video/mp4">
+                          <source src="videos/id_x.mp4" type="video/mp4">
                           Tarayıcı video gösterimini desteklemiyor.
                         </video>
                       </div>
@@ -194,7 +194,7 @@
         physapp.createClosableAlert('danger',"Lütfen kullanıcıya eklemek istediğiniz egzersizi seçin.",'alertBox1');
         return;
       }
-      physaspp.Assign(value,<%- client.id %>);
+      physapp.Assign(value,<%- client.id %>);
     });
     $("#btn2").on('click', ()=>{
        // TODO
