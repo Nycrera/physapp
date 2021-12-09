@@ -79,4 +79,12 @@ app.post('/login', express.urlencoded({ extended: true }), require("./controller
 app.get('/login', require("./controllers/login")[0]);
 app.get('/logout', require("./controllers/logout"));
 
+// Auto assigner cronjob
+var CronJob = require('cron').CronJob;
+var job = new CronJob('10 0 * * *', function() {
+    require('./helpers/autoAssigner')();
+}, null, true, 'Europe/Istanbul');
+job.start();
+
+
 app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));
