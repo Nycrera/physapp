@@ -25,7 +25,7 @@ physapp.Assign = function(exerciseTypeId, clientId){
     success: function(user_exercise) { 
       if(typeof(user_exercise) === 'string') user_exercise = JSON.parse(user_exercise);
       $('#listAssignedExercises').append(`<li id="assignedItem${user_exercise.id}" class="list-group-item">
-      <span class="align-middle">${exerciseType.name}
+      <span class="align-middle">${user_exercise.exerciseType.name}
       <button onclick="physapp.unAssign(<%= ${user_exercise.id} %>,${clientId})" class="btn btn-danger float-end" type="button">Kaldır</button>
       </span>
       </li>`);

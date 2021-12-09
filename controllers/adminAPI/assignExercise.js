@@ -8,6 +8,9 @@ module.exports = function(req,res,next){
             res.end(500);
             return;
         }
-        res.json({user_exercise:{id:result.insertId}});
+        db.query('SELECT * FROM exercises WHERE id=?',[result.insertId], (err2,exerciseData)=>{
+            res.json({user_exercise:{id:result.insertId},exerciseType:exerciseData});
+        });
+
     });
 }
