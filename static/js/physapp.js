@@ -167,7 +167,7 @@ physapp.renderUser = function (user, barUporDown) {
  <td>
    <div class="clearfix">
      <div class="float-start">
-       <div class="fw-semibold">50%</div>
+       <div class="fw-semibold">${user.todayProgress}%</div>
      </div>
    </div>
    <div class="progress progress">
