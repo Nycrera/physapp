@@ -194,7 +194,7 @@
   <script src="js/jquery-3.6.0.min.js"></script>
   <script src="js/physapp.js"></script>
   <script type='text/javascript'>
-    var exercises =<% if(exercises.length){ %><% -JSON.stringify(exercises) %><%} else{ %> [] <% } %>;
+    var exercises =<% if(exercises.length){ %><%- JSON.stringify(exercises) %><%} else{ %> [] <% } %>;
   </script>
   <script>
     $('#button1').on('click',function(){

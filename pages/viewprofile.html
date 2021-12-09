@@ -109,7 +109,7 @@
                     <h4>Yeni Egzersiz Ata:</h4><br>
                     <span id="alertBox1"></span>
                     <div class="mb-3">
-                      <select id="exerciseSelect2" name="editId" class="form-select" aria-label="Default select example">
+                      <select id="exerciseSelect1" name="editId" class="form-select" aria-label="Default select example">
                         <option value="0">Atamak istediğiniz egzersizi seçin</option>
                         <% for(var i=0; i<exercises.length;i++) { %>
                           <option value="<%= exercises[i].id %>">
@@ -118,9 +118,9 @@
                           <% } %>
                       </select>
                       <br>
-                      <div id="videoElement2" class="mb-3 float-end" style="display: none;">
+                      <div id="videoElement1" class="mb-3 float-end" style="display: none;">
                         <video width="320" height="240" controls>
-                          <source src="videos/id_x.mp4" type="video/mp4">
+                          <source src="" type="video/mp4">
                           Tarayıcı video gösterimini desteklemiyor.
                         </video>
                       </div>
@@ -179,10 +179,19 @@
   <script src="js/jquery-3.6.0.min.js"></script>
   <script src="js/physapp.js"></script>
   <script>
+    $('#exerciseSelect1').on('change',()=>{
+      if(parseInt(this.value)){
+        $('#videoElement1 > video > source').attr('src','videos/id_'+ parseInt(this.value) + '.mp4');
+        $('#videoElement1').show();
+        document.querySelector("#videoElement1 > video").load();
+      }
+    });
+
+
     $("#btn1").on('click',()=>{
-      let value = parseInt(document.getElementById('exerciseSelect2').value);
+      let value = parseInt(document.getElementById('exerciseSelect1').value);
       if(!value){
-        phyaspp.createClosableAlert('danger',"Lütfen kullanıcıya eklemek istediğiniz egzersizi seçin.",'alertBox1');
+        physapp.createClosableAlert('danger',"Lütfen kullanıcıya eklemek istediğiniz egzersizi seçin.",'alertBox1');
         return;
       }
       physaspp.Assign(value,<%- client.id %>);
