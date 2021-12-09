@@ -8,8 +8,10 @@ module.exports = function(req,res,next){
             res.end(500);
             return;
         }
-        db.query('SELECT * FROM exercises WHERE id=?',[result.insertId], (err2,exerciseData)=>{
-            res.json({user_exercise:{id:result.insertId},exerciseType:exerciseData});
+        db.query('SELECT (exercise) FROM user_exercises WHERE id=?',[result.insertId], (err2,exerciseData)=>{
+            db.query('SELECT * FROM exercises WHERE id=?',[exerciseData.exercise], (err3,exerciseTypeData)=>{
+            res.json({user_exercise:{id:result.insertId},exerciseType:exerciseTypeData});
+        });
         });
 
     });
