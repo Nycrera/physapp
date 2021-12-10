@@ -88,7 +88,7 @@
                     <label for="month">Ay:</label>
                     <select name="month" id="selectMonth">
                       <% for(var i=0;i<months.length;i++){ %>
-                      <option value="<%- months[i] %>"<% if(i==months.length-1) %> selected<% } %>><%= months[i] %></option>
+                      <option value="<%- months[i] %>"<% if(i==months.length-1){ %> selected<% } %>><%= months[i] %></option>
                       <% } %>
                     </select>
                   </div>
@@ -96,7 +96,7 @@
                     <label for="year">Yıl:</label>
                     <select name="year" id="selectYear">
                       <% for(var i=0;i<years.length;i++){ %>
-                        <option value="<%- years[i] %>"<% if(i==years.length-1) %> selected<% } %>><%= years[i] %></option>
+                        <option value="<%- years[i] %>"<% if(i==years.length-1){ %> selected<% } %>><%= years[i] %></option>
                         <% } %>
                       </select>
                     </select>
