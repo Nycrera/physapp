@@ -53,6 +53,8 @@ app.get('/admin_logout',(req,res) => res.redirect('/logout'));
 // ADMIN API
 app.get('/adminAPI/listUsers', admin_auth, express.json(), require('./controllers/adminAPI/listUsers'));
 
+app.post('/adminAPI/fetchUserData', admin_auth, express.json(), require('./controllers/adminAPI/fetchUserData'));
+app.post('/adminAPI/editUser', admin_auth, express.json(), require('./controllers/adminAPI/editUser'));
 app.post('/adminAPI/killUser', admin_auth, express.json(), require('./controllers/adminAPI/killUser'));
 app.post('/adminAPI/createExercise', admin_auth, express.json(), require('./controllers/adminAPI/createExercise'));
 app.post('/adminAPI/updateExercise', admin_auth, express.json(), require('./controllers/adminAPI/updateExercise'));

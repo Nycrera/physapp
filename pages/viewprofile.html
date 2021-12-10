@@ -74,9 +74,12 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card mb-4">
-              <div class="card-header"><%= client.name %> <%= client.surname %></div>
+              <div class="card-header">
+                <%= client.name %>
+                  <%= client.surname %>
+              </div>
               <div class="card-body">
-                  
+                <!-- GRAPH GOES HERE TODO -->
               </div>
             </div>
           </div>
@@ -92,74 +95,41 @@
                 <div class="card-header">Egzersizler</div>
                 <div class="card-body">
                   <div class="row">
-                  <div class="col-4">
-                    <h4>Atanmış Egzersizler:</h3><br>
-                    <ul id="listAssignedExercises" class="list-group">
-                      <% for(var i=0; i<user_exercises.length;i++) { %>
-                      <li id="assignedItem<%= user_exercises[i].id %>" class="list-group-item">
-                        <span class="align-middle">
-                          <%= exercises.find(o => o.id == user_exercises[i].exercise).name %>
-                          <button onclick="physapp.unAssign(<%- user_exercises[i].id %>)" class="btn btn-danger float-end" type="button">Kaldır</button>
-                        </span>
-                        </li>
-                        <% } %>
-                    </ul>
-                  </div>
-                  <div class="col-6">
-                    <h4>Yeni Egzersiz Ata:</h4><br>
-                    <span id="alertBox1"></span>
-                    <div class="mb-3">
-                      <select id="exerciseSelect1" class="form-select">
-                        <option value="0">Atamak istediğiniz egzersizi seçin</option>
-                        <% for(var i=0; i<exercises.length;i++) { %>
-                          <option value="<%= exercises[i].id %>">
-                            <%= exercises[i].name %>
-                          </option>
-                          <% } %>
-                      </select>
-                      <br>
-                      <div id="videoElement1" class="mb-3 float-end" style="display: none;">
-                        <video width="320" height="240" controls>
-                          <source src="videos/id_x.mp4" type="video/mp4">
-                          Tarayıcı video gösterimini desteklemiyor.
-                        </video>
-                      </div>
-                      <br>
-                      <button id="btn1" class="btn btn-success" type="button">Egzersiz Ekle</button>
-                  </div>
-                </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.col-->
-          </div>
-          <!-- /.row-->
-        </div>
-        <div class="body flex-grow-1 px-3">
-          <div class="container-lg">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card mb-4">
-                  <div class="card-header">Notlar</div>
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-4">
-                        <h4>Başlangıç Yorumları:</h4>
-                        <div class="form-floating">
-                          <textarea class="form-control" id="floatingTextarea1" placeholder="Leave a comment here" style="height: 200px"></textarea>
-                          <label for="floatingTextarea2">Comments</label>
+                    <div class="col-4">
+                      <h4>Atanmış Egzersizler:</h3><br>
+                        <ul id="listAssignedExercises" class="list-group">
+                          <% for(var i=0; i<user_exercises.length;i++) { %>
+                            <li id="assignedItem<%= user_exercises[i].id %>" class="list-group-item">
+                              <span class="align-middle">
+                                <%= exercises.find(o=> o.id == user_exercises[i].exercise).name %>
+                                  <button onclick="physapp.unAssign(<%- user_exercises[i].id %>)"
+                                    class="btn btn-danger float-end" type="button">Kaldır</button>
+                              </span>
+                            </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                      <h4>Yeni Egzersiz Ata:</h4><br>
+                      <span id="alertBox1"></span>
+                      <div class="mb-3">
+                        <select id="exerciseSelect1" class="form-select">
+                          <option value="0">Atamak istediğiniz egzersizi seçin</option>
+                          <% for(var i=0; i<exercises.length;i++) { %>
+                            <option value="<%= exercises[i].id %>">
+                              <%= exercises[i].name %>
+                            </option>
+                            <% } %>
+                        </select>
+                        <br>
+                        <div id="videoElement1" class="mb-3 float-end" style="display: none;">
+                          <video width="320" height="240" controls>
+                            <source src="videos/id_x.mp4" type="video/mp4">
+                            Tarayıcı video gösterimini desteklemiyor.
+                          </video>
                         </div>
                         <br>
-                        <button id="btn2" class="btn btn-success" type="button">Kaydet</button>
-                      </div>
-                      <div class="col-4">
-                        <h4>Bitiş Yorumları:</h4>
-                        <div class="form-floating">
-                          <textarea class="form-control" id="floatingTextarea2" placeholder="Leave a comment here" style="height: 200px"></textarea>
-                          <label for="floatingTextarea2">Comments</label>
-                        </div>
-                        <br>
-                        <button id="btn3" class="btn btn-success" type="button">Kaydet</button>
+                        <button id="btn1" class="btn btn-success" type="button">Egzersiz Ekle</button>
                       </div>
                     </div>
                   </div>
@@ -169,41 +139,102 @@
             </div>
             <!-- /.row-->
           </div>
-    </div>
-  </div>
-  <!-- CoreUI and necessary plugins-->
-  <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
-  <script src="vendors/simplebar/js/simplebar.min.js"></script>
-  <!-- Plugins and scripts required by this view-->
-  <script src="vendors/@coreui/utils/js/coreui-utils.js"></script>
-  <script src="js/jquery-3.6.0.min.js"></script>
-  <script src="js/physapp.js"></script>
-  <script>
-    /*$('#exerciseSelect1').on('change',()=>{
-      var value = parseInt(document.getElementById('exerciseSelect1').value);
-      if(value){
-        $('#videoElement1 > video > source').attr('src','videos/id_'+ value + '.mp4');
-        $('#videoElement1').show();
-        document.querySelector("#videoElement1 > video").load();
-      }
-    });*/
+          <div class="body flex-grow-1 px-3">
+            <div class="container-lg">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card mb-4">
+                    <div class="card-header">Notlar</div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-4">
+                          <h4>Başlangıç Yorumları:</h4>
+                          <div class="form-floating">
+                            <textarea class="form-control" id="floatingTextarea1" placeholder="Leave a comment here"
+                              style="height: 200px"><%= client.note_start %></textarea>
+                            <label for="floatingTextarea2">Comments</label>
+                          </div>
+                          <br>
+                          <button id="btn2" class="btn btn-success" type="button">Kaydet</button>
+                        </div>
+                        <div class="col-4">
+                          <h4>Bitiş Yorumları:</h4>
+                          <div class="form-floating">
+                            <textarea class="form-control" id="floatingTextarea2" placeholder="Leave a comment here"
+                              style="height: 200px"><%= client.note_end %></textarea>
+                            <label for="floatingTextarea2">Comments</label>
+                          </div>
+                          <br>
+                          <button id="btn3" class="btn btn-success" type="button">Kaydet</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.col-->
+              </div>
+              <!-- /.row-->
+            </div>
+          </div>
+        </div>
+        <!-- CoreUI and necessary plugins-->
+        <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
+        <script src="vendors/simplebar/js/simplebar.min.js"></script>
+        <!-- Plugins and scripts required by this view-->
+        <script src="vendors/@coreui/utils/js/coreui-utils.js"></script>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/physapp.js"></script>
+        <script>
+          /*$('#exerciseSelect1').on('change',()=>{
+            var value = parseInt(document.getElementById('exerciseSelect1').value);
+            if(value){
+              $('#videoElement1 > video > source').attr('src','videos/id_'+ value + '.mp4');
+              $('#videoElement1').show();
+              document.querySelector("#videoElement1 > video").load();
+            }
+          });*/
 
 
-    $("#btn1").on('click',()=>{
-      let value = parseInt(document.getElementById('exerciseSelect1').value);
-      if(!value){
-        physapp.createClosableAlert('danger',"Lütfen kullanıcıya eklemek istediğiniz egzersizi seçin.",'alertBox1');
-        return;
-      }
-      physapp.Assign(value,<%- client.id %>);
-    });
-    $("#btn2").on('click', ()=>{
-       // TODO
-    });
-    $("#btn3").on('click', ()=>{
-      // TODO
-    });
-  </script>
+          $("#btn1").on('click', () => {
+            let value = parseInt(document.getElementById('exerciseSelect1').value);
+            if (!value) {
+              physapp.createClosableAlert('danger', "Lütfen kullanıcıya eklemek istediğiniz egzersizi seçin.", 'alertBox1');
+              return;
+            }
+            physapp.Assign(value,<%- client.id %>);
+          });
+          $("#btn2").on('click', () => {
+            editUser(<%- client.id %>, {note_start:document.getElementById('floatingTextarea1').innerText},(err)=>{
+              if(err){
+                alert('Kayıt sırasında hata oluştu.');
+              }
+            });
+          });
+          $("#btn3").on('click', () => {
+            editUser(<%- client.id %>, {note_end:document.getElementById('floatingTextarea2').innerText},(err)=>{
+              if(err){
+                alert('Kayıt sırasında hata oluştu.');
+              }
+            });
+          });
+
+          function editUser(id,data,cb) {
+            data.id = id;
+            $.ajax({
+              type: 'POST',
+              url: 'adminAPI/editUser',
+              data: JSON.stringify(data),
+              success: function () {
+                cb(false);
+              },
+              fail: function () {
+                cb(true);
+              },
+              contentType: "application/json",
+              dataType: 'json'
+            });
+          }
+        </script>
 
 </body>
 

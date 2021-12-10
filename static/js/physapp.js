@@ -108,6 +108,23 @@ physapp.updateExercise = function (exerciseId, data, cb){
 });
 }
 
+physapp.getUserData = function(client_id, month, year,cb){
+  $.ajax({
+    type: 'POST',
+    url: 'adminAPI/fetchUserData',
+    data: JSON.stringify({client_id:client_id, month:month, year:year}),
+    success: function(data) { 
+      if(typeof(data) === 'string') data = JSON.parse(data);
+      cb(false,data.user_exercises);
+     },
+    fail: function(){
+      cb(true);
+    },
+    contentType: "application/json",
+    dataType: 'json'
+});
+}
+
 physapp.uploadVideo = function(name,file,progressBar,cb){
   var data = new FormData();
   data.append('file',file);
