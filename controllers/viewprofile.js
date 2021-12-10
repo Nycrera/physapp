@@ -21,11 +21,11 @@ module.exports = function (req, res, next) {
                     var months = [];
                     var years = [];
                     all_user_exercises.forEach(el => {
-                        if(!months.find(val => val == el.getMonth())){
-                            months.push(el.getMonth());
+                        if(!months.find(val => val == el.expiration_time.getMonth())){
+                            months.push(el.expiration_time.getMonth());
                         }
-                        if(!years.find(val => val == el.getYear())){
-                            years.push(el.getYear());
+                        if(!years.find(val => val == el.expiration_time.getYear())){
+                            years.push(el.expiration_time.getYear());
                         }
                     });
                     
