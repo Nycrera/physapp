@@ -13,6 +13,7 @@
   <!-- Vendors styles-->
   <link rel="stylesheet" href="vendors/simplebar/css/simplebar.css">
   <link rel="stylesheet" href="css/vendors/simplebar.css">
+  <link rel="stylesheet" href="css/preloader.css">
   <!-- Main styles for this application-->
   <link href="css/style.css" rel="stylesheet">
 </head>
@@ -78,9 +79,31 @@
                 <%= client.name %>
                   <%= client.surname %>
               </div>
-              <div class="card-body">
-                <!-- GRAPH GOES HERE TODO -->
+              <div id="graph-container" class="card-body">
+                <div class="chart-container" style="position: relative; width:80%; margin:auto;">
+                  <canvas id="chart"></canvas>
+                </div>
+                <div class="row" style:"margin:auto;">
+                  <div class="col-mb-12">
+                    <label for="month">Ay:</label>
+                    <select name="month" id="selectMonth">
+                      <% for(var i=0;i<months.length;i++){ %>
+                      <option value="<%- months[i] %>"<% if(i==months.length-1) %> selected<% } %>><%= months[i] %></option>
+                      <% } %>
+                    </select>
+                  </div>
+                  <div class="col-mb-12">
+                    <label for="year">Yıl:</label>
+                    <select name="year" id="selectYear">
+                      <% for(var i=0;i<years.length;i++){ %>
+                        <option value="<%- years[i] %>"<% if(i==years.length-1) %> selected<% } %>><%= years[i] %></option>
+                        <% } %>
+                      </select>
+                    </select>
+                  </div>
+                </div>
               </div>
+
             </div>
           </div>
           <!-- /.col-->
@@ -183,7 +206,25 @@
         <!-- Plugins and scripts required by this view-->
         <script src="vendors/@coreui/utils/js/coreui-utils.js"></script>
         <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/jquery.preloader.min.js"></script>
         <script src="js/physapp.js"></script>
+        <script src="js/chart.min.js"></script>
+
+        <script>
+          $('graph-container').preloader();
+          $(document).ready(function () {
+            physapp.getUserData(<%- client.id %>, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), (err,data)=>{
+              if(err){
+                alert("Kullanıcı verileri alınırken hata");
+              }else{
+                console.log(data.user_exercises);
+                console.log(JSON.stringify(data.user_exercises));
+                $('graph-container').preloader('remove');
+              }
+            });
+          });
+        </script>
+
         <script>
           /*$('#exerciseSelect1').on('change',()=>{
             var value = parseInt(document.getElementById('exerciseSelect1').value);
@@ -194,7 +235,6 @@
             }
           });*/
 
-
           $("#btn1").on('click', () => {
             let value = parseInt(document.getElementById('exerciseSelect1').value);
             if (!value) {
@@ -204,21 +244,21 @@
             physapp.Assign(value,<%- client.id %>);
           });
           $("#btn2").on('click', () => {
-            editUser(<%- client.id %>, {note_start:document.getElementById('floatingTextarea1').innerText},(err)=>{
-              if(err){
+            editUser(<% - client.id %>, { note_start: document.getElementById('floatingTextarea1').innerText }, (err) => {
+              if (err) {
                 alert('Kayıt sırasında hata oluştu.');
               }
             });
           });
           $("#btn3").on('click', () => {
-            editUser(<%- client.id %>, {note_end:document.getElementById('floatingTextarea2').innerText},(err)=>{
-              if(err){
+            editUser(<% - client.id %>, { note_end: document.getElementById('floatingTextarea2').innerText }, (err) => {
+              if (err) {
                 alert('Kayıt sırasında hata oluştu.');
               }
             });
           });
 
-          function editUser(id,data,cb) {
+          function editUser(id, data, cb) {
             data.id = id;
             $.ajax({
               type: 'POST',
