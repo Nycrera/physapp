@@ -21,7 +21,7 @@ function queryGenerator(data) {
 
     for (var key in data) {
         if (key == 'id') continue;
-        if (data[key]) params += mysql.escapeId(key) + ' = ' + mysql.escape(data[key]) + ', ';
+        if (typeof(data[key]) !== 'undefined') params += mysql.escapeId(key) + ' = ' + mysql.escape(data[key]) + ', ';
     }
 
     params = params.slice(0, -2); //Remove last ","
