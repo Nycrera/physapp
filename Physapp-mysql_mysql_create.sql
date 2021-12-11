@@ -33,6 +33,7 @@ CREATE TABLE `user_exercises` (
 
 CREATE TABLE `exercises` (
 	`id` int NOT NULL AUTO_INCREMENT UNIQUE,
+	`name` varchar(255) NOT NULL,
 	`video` int NOT NULL,
 	`description` TEXT,
 	PRIMARY KEY (`id`)
