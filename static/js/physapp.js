@@ -2,12 +2,12 @@ var physapp = {};
 
 physapp.fetchUserList = function () { // Call as soon as possible, or after load idk
   $.get("adminAPI/listUsers", function (data) {
-    if(typeof(data) == 'string') data = JSON.parse(data);
+    if (typeof (data) == 'string') data = JSON.parse(data);
     data.users.forEach((user, index) => {
-      if(index < (data.users.length-2)){
-        physapp.renderUser(user,'down');
-      }else{
-        physapp.renderUser(user,'up');
+      if (index < (data.users.length - 2)) {
+        physapp.renderUser(user, 'down');
+      } else {
+        physapp.renderUser(user, 'up');
       }
     });
     $('body').preloader('remove');
@@ -17,151 +17,152 @@ physapp.fetchUserList = function () { // Call as soon as possible, or after load
     });
 }
 
-physapp.Assign = function(exerciseTypeId, clientId){
+physapp.Assign = function (exerciseTypeId, clientId) {
   $.ajax({
     type: 'POST',
     url: 'adminAPI/assignExercise',
-    data: JSON.stringify({exerciseTypeId: exerciseTypeId, clientId: clientId}),
-    success: function(data) { 
-      if(typeof(data) === 'string') data = JSON.parse(data);
+    data: JSON.stringify({ exerciseTypeId: exerciseTypeId, clientId: clientId }),
+    success: function (data) {
+      if (typeof (data) === 'string') data = JSON.parse(data);
       $('#listAssignedExercises').append(`<li id="assignedItem${data.user_exercise.id}" class="list-group-item">
       <span class="align-middle">${data.exerciseType.name}
       <button onclick="physapp.unAssign(<%= ${data.user_exercise.id} %>,${clientId})" class="btn btn-danger float-end" type="button">Kaldır</button>
       </span>
       </li>`);
-      $('#assignedItem'+data.user_exercise.id).fadeIn();
+      $('#assignedItem' + data.user_exercise.id).fadeIn();
     },
-    fail: function(){
+    fail: function () {
       alert("Erişim Hatası: İstek Başarısız");
     },
     contentType: "application/json",
     dataType: 'json'
-});
+  });
 }
 
 
-physapp.unAssign = function(exerciseId){
+physapp.unAssign = function (exerciseId) {
   $.ajax({
     type: 'POST',
     url: 'adminAPI/unAssignExercise',
-    data: JSON.stringify({exerciseId: exerciseId}),
-    success: function() { 
-      $('#assignedItem'+exerciseId).fadeOut();
+    data: JSON.stringify({ exerciseId: exerciseId }),
+    success: function () {
+      $('#assignedItem' + exerciseId).fadeOut();
     },
-    fail: function(){
+    fail: function () {
       alert("Erişim Hatası: İstek Başarısız");
     },
     contentType: "application/json",
     dataType: 'json'
-});
+  });
 }
 
 
-physapp.disableUser = function(id) {
+physapp.disableUser = function (id) {
   $.ajax({
     type: 'POST',
     url: 'adminAPI/killUser',
-    data: JSON.stringify({id:id,disabled:true}),
-    success: function() { 
+    data: JSON.stringify({ id: id, disabled: true }),
+    success: function () {
       $('body').preloader('remove');
       alert('Kullanıcı hesabı kapatıldı.');
       document.referrer ? window.location = document.referrer : history.back()
-     },
-    fail: function(){
+    },
+    fail: function () {
       alert("Erişim Hatası: İstek Başarısız");
     },
     contentType: "application/json",
     dataType: 'json'
-});
+  });
 }
 
-physapp.createExercise = function(name,videoId,cb){
+physapp.createExercise = function (name, videoId, cb) {
   $.ajax({
     type: 'POST',
     url: 'adminAPI/createExercise',
-    data: JSON.stringify({name:name,video:videoId}),
-    success: function(data) { 
-      if(typeof(data) === 'string') data = JSON.parse(data);
-      cb(false,data);
-     },
-    fail: function(){
+    data: JSON.stringify({ name: name, video: videoId }),
+    success: function (data) {
+      if (typeof (data) === 'string') data = JSON.parse(data);
+      cb(false, data);
+    },
+    fail: function () {
       cb(true);
     },
     contentType: "application/json",
     dataType: 'json'
-});
+  });
 }
 
-physapp.updateExercise = function (exerciseId, data, cb){
+physapp.updateExercise = function (exerciseId, data, cb) {
   $.ajax({
     type: 'POST',
     url: 'adminAPI/updateExercise',
-    data: JSON.stringify({id:exerciseId, data : data}),
-    success: function() { 
+    data: JSON.stringify({ id: exerciseId, data: data }),
+    success: function () {
       cb(false);
-     },
-    fail: function(){
+    },
+    fail: function () {
       cb(true);
     },
     contentType: "application/json",
     dataType: 'json'
-});
+  });
 }
 
-physapp.getUserData = function(client_id, month, year,cb){
+physapp.getUserData = function (client_id, month, year, cb) {
   $.ajax({
     type: 'POST',
     url: 'adminAPI/fetchUserData',
-    data: JSON.stringify({client_id:client_id, month:month, year:year}),
-    success: function(data) { 
-      if(typeof(data) === 'string') data = JSON.parse(data);
-      cb(false,data.user_exercises);
-     },
-    fail: function(){
+    data: JSON.stringify({ client_id: client_id, month: month, year: year }),
+    success: function (data) {
+      if (typeof (data) === 'string') data = JSON.parse(data);
+      cb(false, data.user_exercises);
+    },
+    fail: function () {
       cb(true);
     },
     contentType: "application/json",
     dataType: 'json'
-});
+  });
 }
 
-physapp.uploadVideo = function(name,file,progressBar,cb){
+
+physapp.uploadVideo = function (name, file, progressBar, cb) {
   var data = new FormData();
-  data.append('file',file);
-  data.append('name',name);
+  data.append('file', file);
+  data.append('name', name);
   $.ajax({
-    xhr: function() {
-        var xhr = new window.XMLHttpRequest();
-        xhr.upload.addEventListener("progress", function(evt) {
-            if (evt.lengthComputable) {
-                var percentComplete = ((evt.loaded / evt.total) * 100);
-                progressBar.style.width = percentComplete.toString() + '%';
-                progressBar.innerText = percentComplete.toFixed(2).toString() + '%';
-            }
-        }, false);
-        return xhr;
+    xhr: function () {
+      var xhr = new window.XMLHttpRequest();
+      xhr.upload.addEventListener("progress", function (evt) {
+        if (evt.lengthComputable) {
+          var percentComplete = ((evt.loaded / evt.total) * 100);
+          progressBar.style.width = percentComplete.toString() + '%';
+          progressBar.innerText = percentComplete.toFixed(2).toString() + '%';
+        }
+      }, false);
+      return xhr;
     },
     type: 'POST',
     url: 'adminAPI/upload',
     data: data,
     contentType: false,
     cache: false,
-    processData:false,
-    beforeSend: function(){
+    processData: false,
+    beforeSend: function () {
       progressBar.style.width = '0%';
-      progressBar.innerText ='0%';
+      progressBar.innerText = '0%';
     },
-    error:function(){
-        cb(true);
+    error: function () {
+      cb(true);
     },
-    success: function(data){
-      cb(false,parseInt(data));
+    success: function (data) {
+      cb(false, parseInt(data));
     }
-});
+  });
 }
 
-physapp.createClosableAlert = function(severity,msg,elementId){
-  $('#'+elementId).append(`<div class="alert alert-${severity} alert-dismissible fade show" role="alert">
+physapp.createClosableAlert = function (severity, msg, elementId) {
+  $('#' + elementId).append(`<div class="alert alert-${severity} alert-dismissible fade show" role="alert">
   ${msg}
   <button class="btn-close" type="button" data-coreui-dismiss="alert" aria-label="Close"></button>
 </div>`);

@@ -88,17 +88,19 @@
                     <label for="month">Ay:</label>
                     <select name="month" id="selectMonth">
                       <% for(var i=0;i<months.length;i++){ %>
-                      <option value="<%- months[i] %>"<% if(i==months.length-1){ %> selected<% } %>><%= months[i] %></option>
-                      <% } %>
+                        <option value="<%- months[i] %>" <% if(i==months.length-1){ %> selected<% } %>><%= months[i] %>
+                        </option>
+                        <% } %>
                     </select>
                   </div>
                   <div class="col-mb-12">
                     <label for="year">Yıl:</label>
                     <select name="year" id="selectYear">
                       <% for(var i=0;i<years.length;i++){ %>
-                        <option value="<%- years[i] %>"<% if(i==years.length-1){ %> selected<% } %>><%= years[i] %></option>
+                        <option value="<%- years[i] %>" <% if(i==years.length-1){ %> selected<% } %>><%= years[i] %>
+                        </option>
                         <% } %>
-                      </select>
+                    </select>
                     </select>
                   </div>
                 </div>
@@ -211,18 +213,83 @@
         <script src="js/chart.min.js"></script>
 
         <script>
+          var globalChart;
           $('graph-container').preloader();
           $(document).ready(function () {
-            physapp.getUserData(<%- client.id %>, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), (err,data)=>{
-              if(err){
+            physapp.getUserData(<%- client.id %>, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), (err, data) => {
+              if (err) {
                 alert("Kullanıcı verileri alınırken hata");
-              }else{
-                console.log(data.user_exercises);
-                console.log(JSON.stringify(data.user_exercises));
+              } else {
+                renderGraph(data, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), true);
                 $('graph-container').preloader('remove');
               }
             });
           });
+
+          $('#selectMonth').on('change', function () {
+            physapp.getUserData(<%- client.id %>, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), (err, data) => {
+              if (err) {
+                alert("Kullanıcı verileri alınırken hata");
+              } else {
+                renderGraph(data, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), false);
+              }
+            });
+          });
+
+          $('#selectYear').on('change', function () {
+            physapp.getUserData(<%- client.id %>, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), (err, data) => {
+              if (err) {
+                alert("Kullanıcı verileri alınırken hata");
+              } else {
+                renderGraph(data, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), false);
+              }
+            });
+          });
+
+          function renderGraph(sourceData, month, year, alsoConstruct) {
+            var dayCount = (new Date(parseInt(year), parseInt(month), 0).getDate());
+            var labels = Array.from({ length: dayCount }, (_, i) => i + 1);
+            var data = [];
+            labels.forEach((day) => {
+              var totalCount = 0;
+              var completedCount = 0;
+              sourceData.forEach((el) => {
+                var date = new Date(el.expiration_time)
+                if (date.getDate() == day) {
+                  totalCount++;
+                  if (el.done) completedCount++;
+                }
+              });
+              data.push(Math.round(completedCount / totalCount * 100));
+            });
+
+            labels.map((i) => i.toString());
+            if (alsoConstruct) {
+              var ctx = document.getElementById('chart').getContext('2d');
+              globalChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                  labels: labels,
+                  datasets: [{
+                    label: 'Tamamlanan %',
+                    data: data,
+                  }]
+                },
+                options: {
+                  scales: {
+                    y: {
+                      suggestedMax: 100,
+                      beginAtZero: true
+                    }
+                  }
+                }
+              });
+            } else {
+              globalChart.data.datasets.data = data;
+              globalChart.update();
+            }
+          }
+
         </script>
 
         <script>
