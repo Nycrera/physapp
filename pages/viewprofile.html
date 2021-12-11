@@ -314,14 +314,14 @@
             physapp.Assign(value,<%- client.id %>);
           });
           $("#btn2").on('click', () => {
-            editUser(<%- client.id %>, { note_start: document.getElementById('floatingTextarea1').innerText }, (err) => {
+            editUser(<%- client.id %>, { note_start: document.getElementById('floatingTextarea1').value }, (err) => {
               if (err) {
                 alert('Kayıt sırasında hata oluştu.');
               }
             });
           });
           $("#btn3").on('click', () => {
-            editUser(<%- client.id %>, { note_end: document.getElementById('floatingTextarea2').innerText }, (err) => {
+            editUser(<%- client.id %>, { note_end: document.getElementById('floatingTextarea2').value }, (err) => {
               if (err) {
                 alert('Kayıt sırasında hata oluştu.');
               }
