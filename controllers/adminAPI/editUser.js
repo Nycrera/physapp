@@ -3,7 +3,7 @@ module.exports = function (req, res, next) {
         res.end(500);
     } else {
         let queryString = queryGenerator(req.body);
-        let db = require('../helpers/database')(require('../config.json'));
+        let db = require('../../helpers/database')(require('../../config.json'));
         db.query(queryString, [req.body.id], (err) => {
                 if (err) {
                     console.log(err);
