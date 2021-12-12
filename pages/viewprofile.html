@@ -171,6 +171,7 @@
                   <div class="card mb-4">
                     <div class="card-header">Notlar</div>
                     <div class="card-body">
+                      <span id="alertBox2"></span>
                       <div class="row">
                         <div class="col-4">
                           <h4>Başlangıç Yorumları:</h4>
@@ -316,14 +317,18 @@
           $("#btn2").on('click', () => {
             editUser(<%- client.id %>, { note_start: document.getElementById('floatingTextarea1').value }, (err) => {
               if (err) {
-                alert('Kayıt sırasında hata oluştu.');
+                physapp.createClosableAlert('danger', "Yorum kaydedilirken sunucu hatası oluştu.", 'alertBox2');
+              }else{
+                physapp.createClosableAlert('success', "Yorum kaydedildi.", 'alertBox2');
               }
             });
           });
           $("#btn3").on('click', () => {
             editUser(<%- client.id %>, { note_end: document.getElementById('floatingTextarea2').value }, (err) => {
               if (err) {
-                alert('Kayıt sırasında hata oluştu.');
+                physapp.createClosableAlert('danger', "Yorum kaydedilirken sunucu hatası oluştu.", 'alertBox2');
+              }else{
+                physapp.createClosableAlert('success', "Yorum kaydedildi.", 'alertBox2');
               }
             });
           });
