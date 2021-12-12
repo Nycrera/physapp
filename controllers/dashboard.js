@@ -10,7 +10,7 @@ module.exports = function (req, res, next) {
             let exercisesProcessed = 0;
             let exercisesData = [];
             if (countOfRows == 0) {
-                res.render(path.join(__dirname, '../pages/dashboard_empty.html'));
+                res.render(path.join(__dirname, '../pages/dashboard_empty.html'),{client: clients[0]});
                 return;
             } else {
                 result.forEach(el => {
