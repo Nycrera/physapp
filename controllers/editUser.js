@@ -45,6 +45,11 @@ function queryGenerator(data) {
 
     for (var key in data) {
         if (key == 'id') continue;
+        if(key == 'password'){
+            let bcrypt = require('bcrypt');
+            params += 'password = ' + mysql.escape(bcrypt.hashSync(data[key], 10)) + ', ';
+            continue;   
+        }
         if (data[key]) params += mysql.escapeId(key) + ' = ' + mysql.escape(data[key]) + ', ';
     }
 
