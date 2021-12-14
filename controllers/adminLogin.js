@@ -6,7 +6,7 @@ function get(req, res, next) {
     if (req.session.loggedIn) {
         res.redirect('/admin_dashboard');
     } else {
-        res.render(path.join(__dirname,'../pages/admin_login.html'));
+        res.render(path.join(__dirname, '../pages/admin_login.html'));
     }
 
 }
@@ -19,7 +19,7 @@ function post(req, res, next) {
             req.session.adminId = id;
             res.redirect('/admin_dashboard');
         } else {
-            res.render(path.join(__dirname,'../pages/admin_login.html'), {danger: "Giriş Başarısız: Kullanıcı adı veya şifre hatalı girildi."});
+            res.render(path.join(__dirname, '../pages/admin_login.html'), { danger: "Giriş Başarısız: Kullanıcı adı veya şifre hatalı girildi." });
         }
     });
 };
@@ -29,12 +29,13 @@ function checkAdminCredentails(uname, pass, cb) {
         let bcrypt = require('bcrypt');
         let db = require('../helpers/database')(require('../config.json'));
         db.query('SELECT * FROM admins WHERE username = ?', [uname], (err, result, fields) => {
-            if(err){
+            if (err) {
                 console.log(err);
-                res.end(500);
+                res.status(500);
+                res.end();
                 return;
             }
-            if (result.length > 0 && bcrypt.compareSync(pass,result[0].password)) {
+            if (result.length > 0 && bcrypt.compareSync(pass, result[0].password)) {
                 cb(true, result[0].id);
             } else {
                 cb(false);

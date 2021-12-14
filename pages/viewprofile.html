@@ -215,42 +215,46 @@
 
         <script>
           var globalChart;
-          $('graph-container').preloader();
+          $('#graph-container').preloader();
           $(document).ready(function () {
             physapp.getUserData(<%- client.id %>, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), (err, data) => {
               if (err) {
                 alert("Kullanıcı verileri alınırken hata");
               } else {
                 renderGraph(data, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), true);
-                $('graph-container').preloader('remove');
               }
+              $('#graph-container').preloader('remove');
             });
           });
 
           $('#selectMonth').on('change', function () {
+            $('#graph-container').preloader();
             physapp.getUserData(<%- client.id %>, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), (err, data) => {
               if (err) {
                 alert("Kullanıcı verileri alınırken hata");
               } else {
                 renderGraph(data, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), false);
               }
+              $('#graph-container').preloader('remove');
             });
           });
 
           $('#selectYear').on('change', function () {
+            $('#graph-container').preloader();
             physapp.getUserData(<%- client.id %>, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), (err, data) => {
               if (err) {
                 alert("Kullanıcı verileri alınırken hata");
               } else {
                 renderGraph(data, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), false);
               }
+              $('#graph-container').preloader('remove');
             });
           });
 
           function renderGraph(sourceData, month, year, alsoConstruct) {
             var dayCount = (new Date(parseInt(year), parseInt(month), 0).getDate());
             var labels = Array.from({ length: dayCount }, (_, i) => i + 1);
-            var data = [];
+            var percentageValues = [];
             labels.forEach((day) => {
               var totalCount = 0;
               var completedCount = 0;
@@ -261,7 +265,7 @@
                   if (el.done) completedCount++;
                 }
               });
-              data.push(Math.round(completedCount / totalCount * 100));
+              percentageValues.push(Math.round(completedCount / totalCount * 100));
             });
 
             labels.map((i) => i.toString());
@@ -273,7 +277,7 @@
                   labels: labels,
                   datasets: [{
                     label: 'Tamamlanan %',
-                    data: data,
+                    data: percentageValues,
                     fill: false,
                     borderColor: 'rgb(75, 192, 192)',
                     tension: 0.1
@@ -285,11 +289,28 @@
                       suggestedMax: 100,
                       beginAtZero: true
                     }
+                  },
+                  plugins:{
+                    tooltip:{
+                      callbacks:{
+                        footer: (tooltipItem)=>{
+                          var generatedTooltip = [];
+                          var dayExercises = sourceData.filter((el) => {
+                            var date = new Date(el.expiration_time);
+                            return date.getDate() == parseInt(tooltipItem.label)
+                          });
+                          dayExercises.forEach((exercise) => {
+                            generatedTooltip.push(exercise.name + ' ' + (exercise.done ? 'Tamamlandı' : 'Eksik' ));
+                          });
+                          return generatedTooltip;
+                        }
+                      }
+                    }
                   }
                 }
               });
             } else {
-              globalChart.data.datasets.data = data;
+              globalChart.data.datasets.data = percentageValues;
               globalChart.update();
             }
           }

@@ -15,23 +15,24 @@ module.exports = function (req, res, next) {
                         console.log(err2);
                         console.log(err3);
                         console.log(err4);
-                        res.end(500);
+                        res.status(500);
+                        res.end();
                         return;
                     }
                     var months = [];
                     var years = [];
                     all_user_exercises.forEach(el => {
-                        if(!months.find(val => val == el.expiration_time.getMonth()+1)){
-                            months.push(el.expiration_time.getMonth()+1);
+                        if (!months.find(val => val == el.expiration_time.getMonth() + 1)) {
+                            months.push(el.expiration_time.getMonth() + 1);
                         }
-                        if(!years.find(val => val == el.expiration_time.getFullYear())){
+                        if (!years.find(val => val == el.expiration_time.getFullYear())) {
                             years.push(el.expiration_time.getFullYear());
                         }
                     });
-                    
+
 
                     var client = clients[0];
-                    res.render(path.join(__dirname, '../pages/viewprofile.html'), { client: client, exercises: exercises, months: months,years: years,user_exercises: user_exercises/*USER DATA*/ });
+                    res.render(path.join(__dirname, '../pages/viewprofile.html'), { client: client, exercises: exercises, months: months, years: years, user_exercises: user_exercises/*USER DATA*/ });
                 });
             });
         });

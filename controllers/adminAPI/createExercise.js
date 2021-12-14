@@ -4,7 +4,8 @@ module.exports = function (req, res, next) {
     db.query("INSERT INTO exercises (name, video) VALUES (?,?)", [exercise.name, exercise.video], (err, result) => {
         if (err) {
             console.log(err);
-            res.end(500);
+            res.status(500);
+            res.end();
         } else {
             res.json({ id: result.insertId, name: exercise.name, video: exercise.video });
         }

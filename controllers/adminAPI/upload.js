@@ -4,9 +4,10 @@ module.exports = function (req, res, next) {
 
   let db = require('../../helpers/database')(require('../../config.json'));
   db.query('INSERT INTO videos (name) VALUES (?)', [req.body.name], (err, result) => {
-    if(err){
+    if (err) {
       console.log(err);
-      res.end(500);
+      res.status(500);
+      res.end();
       return;
     }
     const tempPath = req.file.path;
