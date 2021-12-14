@@ -295,11 +295,11 @@
                   plugins:{
                     tooltip:{
                       callbacks:{
-                        footer: (tooltipItem)=>{
+                        footer: (tooltipItems)=>{
                           var generatedTooltip = [];
                           var dayExercises = gSourceData.filter((el) => {
                             var date = new Date(el.expiration_time);
-                            return date.getDate() == parseInt(tooltipItem.label)
+                            return date.getDate() == parseInt(tooltipItems[0].label)
                           });
                           dayExercises.forEach((exercise) => {
                             generatedTooltip.push(exercise.name + ' ' + (exercise.done ? 'Tamamlandı' : 'Eksik' ));
