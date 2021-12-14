@@ -215,6 +215,7 @@
 
         <script>
           var globalChart;
+          var gSourceData;
           $('#graph-container').preloader();
           $(document).ready(function () {
             physapp.getUserData(<%- client.id %>, $("#selectMonth :selected").val(), $("#selectYear :selected").val(), (err, data) => {
@@ -252,6 +253,7 @@
           });
 
           function renderGraph(sourceData, month, year, alsoConstruct) {
+            gSourceData = sourceData;
             var dayCount = (new Date(parseInt(year), parseInt(month), 0).getDate());
             var labels = Array.from({ length: dayCount }, (_, i) => i + 1);
             var percentageValues = [];
@@ -295,7 +297,7 @@
                       callbacks:{
                         footer: (tooltipItem)=>{
                           var generatedTooltip = [];
-                          var dayExercises = sourceData.filter((el) => {
+                          var dayExercises = gSourceData.filter((el) => {
                             var date = new Date(el.expiration_time);
                             return date.getDate() == parseInt(tooltipItem.label)
                           });
